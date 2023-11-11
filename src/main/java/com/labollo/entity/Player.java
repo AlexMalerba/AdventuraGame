@@ -108,35 +108,7 @@ public class Player extends Entity {
                 wasStill = false;
             }
 
-            // Reset collision flag if attempting to move in a different direction
-            if (keyH.upPressed && collisionOn) {
-                if (keyH.rightPressed) {
-                    worldX += speed;
-                } else if (keyH.leftPressed) {
-                    worldX -= speed;
-                }
-            }
-            if (keyH.downPressed && collisionOn) {
-                if (keyH.rightPressed) {
-                    worldX += speed;        
-                } else if (keyH.leftPressed) {
-                    worldX -= speed;
-                }
-            }
-            if (keyH.leftPressed && collisionOn) {
-                if (keyH.upPressed) {
-                    worldY -= speed;
-                } else if (keyH.downPressed) {
-                    worldY += speed;
-                }
-            }
-            if (keyH.rightPressed && collisionOn) {
-                if (keyH.upPressed) {
-                    worldY -= speed;
-                } else if (keyH.downPressed) {
-                    worldY += speed;
-                }
-            }
+
         } else {
             spriteNum = 1;
             spriteCounter = 10;
