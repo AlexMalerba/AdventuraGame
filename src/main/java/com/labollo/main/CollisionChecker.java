@@ -2,6 +2,8 @@ package com.labollo.main;
 
 import com.labollo.entity.Entity;
 
+import java.util.Objects;
+
 public class CollisionChecker {
     GamePanel gp;
 
@@ -20,25 +22,25 @@ public class CollisionChecker {
         int entityTopRow = entityTopWorldY / gp.tileSize;
         int entityBottomRow = entityBottomWorldY / gp.tileSize;
 
-        int tileNum1, tileNum2;
+        int tileNum1 = 0, tileNum2 = 0;
 
-        if(entity.direction == "up" || entity.direction == "down" || entity.direction == "right" || entity.direction == "left"){
-            if(entity.direction == "up"){
+        if(Objects.equals(entity.direction, "up") || entity.direction == "down" || entity.direction == "right" || entity.direction == "left"){
+            if(entity.direction.equals("up")){
                 entityTopRow = (entityTopWorldY - entity.speed) / gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
                 tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
             }
-            else if(entity.direction == "down"){
+            else if(entity.direction.equals("down")){
                 entityBottomRow = (entityBottomWorldY + entity.speed) / gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
                 tileNum2 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
             }
-            if(entity.direction == "left") {
+            if(entity.direction.equals("left")) {
                 entityLeftCol = (entityLeftWorldX - entity.speed) / gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
                 tileNum2 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
             }
-            else if(entity.direction == "right"){
+            else if(entity.direction.equals("right")){
                 entityRightCol = (entityRightWorldX + entity.speed) / gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
                 tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];

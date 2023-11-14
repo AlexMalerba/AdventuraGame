@@ -23,15 +23,15 @@ public class Player extends Entity {
         screenX = gp.screenWidth / 2 - (gp.tileSize / 2);
         screenY = gp.screenHeight / 2 - (gp.tileSize / 2);
 
-        solidArea= new Rectangle(8, 16, 32, 32);
+        solidArea= new Rectangle(25, 40, 8, 12);
 
         setDefaultValues();
         getPlayerImage();
     }
 
     public void setDefaultValues() {
-        worldX = 11 * gp.tileSize;
-        worldY = 11 * gp.tileSize;
+        worldX = 25 * gp.tileSize;
+        worldY = 25 * gp.tileSize;
         speed = 4;
         direction = "down";
     }
@@ -90,6 +90,7 @@ public class Player extends Entity {
                 if(!collisionOn) // Move right only if there is no collision
                     worldX += speed;
             }
+
 
             // Manage sprite animation
             spriteCounter++;
