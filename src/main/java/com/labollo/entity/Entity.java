@@ -15,5 +15,5 @@ public class Entity {
     public boolean wasStill = false;
 
     public Rectangle solidArea;
-    public boolean collisionOn  = false;
+    public boolean collisionOn = false;
 }

@@ -44,10 +44,8 @@ public class MenuPanel extends JPanel {
 
         int buttonWidth = 250;
         int buttonHeight = 100;
-        int screenWidth = 768;
-        int screenHeight = 576;
-        int buttonX = (screenWidth - buttonWidth) / 2;
-        int buttonY = (screenHeight - buttonHeight) / 2;
+        int buttonX = (gamePanel.screenWidth - buttonWidth) / 2;
+        int buttonY = (gamePanel.screenHeight - buttonHeight) / 2;
         newGame.setBounds(buttonX, buttonY, buttonWidth, buttonHeight);
         add(newGame);
 

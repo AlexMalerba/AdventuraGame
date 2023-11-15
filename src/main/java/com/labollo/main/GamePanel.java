@@ -43,7 +43,6 @@ public class GamePanel extends JPanel implements Runnable {
     // GamePanel constructor
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight)); // To set your preferred panel size
-        this.setBackground(Color.black); // To set the background to black
         this.setDoubleBuffered(true); // To improve the graphics experience
         this.addKeyListener(keyH); // To hear which key is pressed
         this.setFocusable(true); // To enable the ability to receive input

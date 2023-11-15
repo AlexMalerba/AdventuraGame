@@ -23,7 +23,7 @@ public class Player extends Entity {
         screenX = gp.screenWidth / 2 - (gp.tileSize / 2);
         screenY = gp.screenHeight / 2 - (gp.tileSize / 2);
 
-        solidArea= new Rectangle(25, 40, 8, 12);
+        super.solidArea = new Rectangle(25, 40, 8, 12);
 
         setDefaultValues();
         getPlayerImage();
@@ -73,38 +73,61 @@ public class Player extends Entity {
             if(keyH.upPressed) {
                 direction = "up";
                 if(!collisionOn) { // Move up only if there is no collision
-                    worldY -= speed;
+                    if(keyH.shiftPressed)
+                        worldY -= (speed * 2);
+                    else
+                        worldY -= speed;
                 }
             }
             if(keyH.downPressed) {
                 direction = "down";
                 if (!collisionOn) { // Move down only if there is no collision
-                    worldY += speed;
+                    if(keyH.shiftPressed)
+                        worldY += (speed * 2);
+                    else
+                        worldY += speed;
                 }
             }
             if(keyH.leftPressed) {
                 direction = "left";
                 if(!collisionOn) { // Move left only if there is no collision
-                    worldX -= speed;
+                    if(keyH.shiftPressed)
+                        worldX -= (speed * 2);
+                    else
+                        worldX -= speed;
                 }
             }
             if(keyH.rightPressed){
                 direction = "right";
                 if(!collisionOn) { // Move right only if there is no collision
-                    worldX += speed;
+                    if(keyH.shiftPressed)
+                        worldX += (speed * 2);
+                    else
+                        worldX += speed;
                 }
             }
 
 
             // Manage sprite animation
             spriteCounter++;
-            if(spriteCounter > 10) {
-                if(spriteNum == 1) {
-                    spriteNum = 2;
-                } else if (spriteNum == 2) {
-                    spriteNum = 1;
+            if(keyH.shiftPressed) {
+                if(spriteCounter > 5) {
+                    if(spriteNum == 1) {
+                        spriteNum = 2;
+                    } else if (spriteNum == 2) {
+                        spriteNum = 1;
+                    }
+                    spriteCounter = 0;
                 }
-                spriteCounter = 0;
+            } else {
+                if(spriteCounter > 10) {
+                    if(spriteNum == 1) {
+                        spriteNum = 2;
+                    } else if (spriteNum == 2) {
+                        spriteNum = 1;
+                    }
+                    spriteCounter = 0;
+                }
             }
 
             // Change sprite putting the second (running) if he was still (first was still, now he's in moving)
@@ -157,7 +180,6 @@ public class Player extends Entity {
                 }
             }
         }
-
         g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
     }
 }
