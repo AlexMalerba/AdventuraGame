@@ -72,23 +72,27 @@ public class Player extends Entity {
             // Moving on the map, but first, check for collision
             if(keyH.upPressed) {
                 direction = "up";
-                if(!collisionOn) // Move up only if there is no collision
+                if(!collisionOn) { // Move up only if there is no collision
                     worldY -= speed;
+                }
             }
             if(keyH.downPressed) {
                 direction = "down";
-                if(!collisionOn) // Move down only if there is no collision
+                if (!collisionOn) { // Move down only if there is no collision
                     worldY += speed;
+                }
             }
             if(keyH.leftPressed) {
                 direction = "left";
-                if(!collisionOn) // Move left only if there is no collision
+                if(!collisionOn) { // Move left only if there is no collision
                     worldX -= speed;
+                }
             }
             if(keyH.rightPressed){
                 direction = "right";
-                if(!collisionOn) // Move right only if there is no collision
+                if(!collisionOn) { // Move right only if there is no collision
                     worldX += speed;
+                }
             }
 
 
