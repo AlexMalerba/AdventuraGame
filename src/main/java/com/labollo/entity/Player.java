@@ -15,6 +15,7 @@ public class Player extends Entity {
 
     public final int screenX;
     public final int screenY;
+    public int hasKey = 0;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
@@ -24,6 +25,13 @@ public class Player extends Entity {
         screenY = gp.screenHeight / 2 - (gp.tileSize / 2);
 
         super.solidArea = new Rectangle(25, 40, 8, 12);
+        solidArea.x = 25;
+        solidArea.y = 40;
+        solidArea.width = 8;
+        solidArea.height = 12;
+
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
 
         setDefaultValues();
         getPlayerImage();
@@ -68,6 +76,10 @@ public class Player extends Entity {
             // Check tile collision
             collisionOn = false;
             gp.cChecker.checkTile(this);
+
+            // Check object collision
+            int objIndex = gp.cChecker.checkObject(this, true);
+            pickUpObject(objIndex);
 
             // Moving on the map, but first, check for collision
             if(keyH.upPressed) {
@@ -141,6 +153,29 @@ public class Player extends Entity {
             spriteNum = 1;
             spriteCounter = 10;
             wasStill = true;
+        }
+    }
+
+    public void pickUpObject(int index) {
+        if(index != 999) {
+            String objName = gp.obj[index].name;
+
+            switch (objName) {
+                case "key00" -> {
+                    hasKey++;
+                    gp.obj[index] = null;
+                    System.out.println("key: " + hasKey);
+                }
+                case "door00" -> {
+                    if (hasKey > 0) {
+                        gp.obj[index] = null;
+                        hasKey--;
+                        System.out.println("Door opened!!!");
+                        System.out.println("key: " + hasKey);
+                    } else
+                        System.out.println("You don't have a key!!!");
+                }
+            }
         }
     }
 

@@ -5,7 +5,6 @@ import com.labollo.object.SuperObject;
 import com.labollo.tile.TileManager;
 
 import javax.swing.JPanel;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -68,32 +67,23 @@ public class GamePanel extends JPanel implements Runnable {
         int drawCount = 0; // The number of frames drawn since the last time the FPS was printed
 
         while (gameThread != null) { // While the game is running
-
             currentTime = System.nanoTime(); // Get the current time
 
             // Add the time since the last frame to the delta
             delta += (currentTime - lastTime) / drawInterval;
-
             timer += (currentTime - lastTime); // Add the time since the last frame to the timer
             lastTime = currentTime; // Update the last time
 
             if (delta >= 1) { // If it's time to draw a new frame
-
                 update();
-
                 repaint();
 
                 delta--;
-
                 drawCount++;
             }
 
             if (timer >= 1000000000) { // If it's been a second since the last time the FPS was printed
-
-                System.out.println("FPS: " + drawCount);
-
                 drawCount = 0;
-
                 timer = 0;
             }
         }
