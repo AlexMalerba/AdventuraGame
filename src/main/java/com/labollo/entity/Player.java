@@ -21,27 +21,27 @@ public class Player extends Entity {
         this.gp = gp;
         this.keyH = keyH;
 
-        screenX = gp.screenWidth / 2 - (gp.tileSize / 2);
-        screenY = gp.screenHeight / 2 - (gp.tileSize / 2);
+        screenX = this.gp.screenWidth / 2 - (this.gp.tileSize / 2);
+        screenY = this.gp.screenHeight / 2 - (this.gp.tileSize / 2);
 
-        super.solidArea = new Rectangle(25, 40, 8, 12);
-        solidArea.x = 25;
-        solidArea.y = 40;
-        solidArea.width = 8;
-        solidArea.height = 12;
+        super.solidArea = new Rectangle();
+        super.solidArea.x = 25;
+        super.solidArea.y = 40;
+        super.solidArea.width = 8;
+        super.solidArea.height = 12;
 
-        solidAreaDefaultX = solidArea.x;
-        solidAreaDefaultY = solidArea.y;
+        super.solidAreaDefaultX = solidArea.x;
+        super.solidAreaDefaultY = solidArea.y;
 
-        setDefaultValues();
-        getPlayerImage();
+        this.setDefaultValues();
+        this.getPlayerImage();
     }
 
     public void setDefaultValues() {
-        worldX = 25 * gp.tileSize;
-        worldY = 25 * gp.tileSize;
-        speed = 4;
-        direction = "down";
+        super.worldX = 25 * gp.tileSize;
+        super.worldY = 25 * gp.tileSize;
+        super.speed = 4;
+        super.direction = "down";
     }
 
     // Create player's object via the sprites in path: /resources/player/
@@ -49,14 +49,14 @@ public class Player extends Entity {
 
         try {
             Image player1 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/player/up1.png")));
-            up1 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/player/up1.png")));
-            up2 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/player/up2.png")));
-            down1 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/player/down1.png")));
-            down2 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/player/down2.png")));
-            right1 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/player/right1.png")));
-            right2 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/player/right2.png")));
-            left1 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/player/left1.png")));
-            left2 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/player/left2.png")));
+            super.up1 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/player/up1.png")));
+            super.up2 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/player/up2.png")));
+            super.down1 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/player/down1.png")));
+            super.down2 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/player/down2.png")));
+            super.right1 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/player/right1.png")));
+            super.right2 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/player/right2.png")));
+            super.left1 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/player/left1.png")));
+            super.left2 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/player/left2.png")));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -71,107 +71,107 @@ public class Player extends Entity {
     public void update() {
 
         // Check if any key is pressed
-        if(keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
+        if(this.keyH.upPressed || this.keyH.downPressed || this.keyH.leftPressed || this.keyH.rightPressed) {
 
             // Check tile collision
-            collisionOn = false;
-            gp.cChecker.checkTile(this);
+            super.collisionOn = false;
+            this.gp.cChecker.checkTile(this);
 
             // Check object collision
             int objIndex = gp.cChecker.checkObject(this, true);
-            pickUpObject(objIndex);
+            this.pickUpObject(objIndex);
 
             // Moving on the map, but first, check for collision
-            if(keyH.upPressed) {
-                direction = "up";
-                if(!collisionOn) { // Move up only if there is no collision
-                    if(keyH.shiftPressed)
-                        worldY -= (speed * 2);
+            if(this.keyH.upPressed) {
+                super.direction = "up";
+                if(!super.collisionOn) { // Move up only if there is no collision
+                    if(this.keyH.shiftPressed)
+                        super.worldY -= (super.speed * 2);
                     else
-                        worldY -= speed;
+                        super.worldY -= super.speed;
                 }
             }
             if(keyH.downPressed) {
-                direction = "down";
-                if (!collisionOn) { // Move down only if there is no collision
-                    if(keyH.shiftPressed)
-                        worldY += (speed * 2);
+                super.direction = "down";
+                if (!super.collisionOn) { // Move down only if there is no collision
+                    if(this.keyH.shiftPressed)
+                        super.worldY += (super.speed * 2);
                     else
-                        worldY += speed;
+                        super.worldY += super.speed;
                 }
             }
-            if(keyH.leftPressed) {
-                direction = "left";
-                if(!collisionOn) { // Move left only if there is no collision
-                    if(keyH.shiftPressed)
-                        worldX -= (speed * 2);
+            if(this.keyH.leftPressed) {
+                super.direction = "left";
+                if(!super.collisionOn) { // Move left only if there is no collision
+                    if(this.keyH.shiftPressed)
+                        super.worldX -= (super.speed * 2);
                     else
-                        worldX -= speed;
+                        super.worldX -= super.speed;
                 }
             }
-            if(keyH.rightPressed){
-                direction = "right";
-                if(!collisionOn) { // Move right only if there is no collision
-                    if(keyH.shiftPressed)
-                        worldX += (speed * 2);
+            if(this.keyH.rightPressed){
+                super.direction = "right";
+                if(!super.collisionOn) { // Move right only if there is no collision
+                    if(this.keyH.shiftPressed)
+                        super.worldX += (super.speed * 2);
                     else
-                        worldX += speed;
+                        super.worldX += super.speed;
                 }
             }
 
 
             // Manage sprite animation
-            spriteCounter++;
-            if(keyH.shiftPressed) {
-                if(spriteCounter > 5) {
-                    if(spriteNum == 1) {
-                        spriteNum = 2;
-                    } else if (spriteNum == 2) {
-                        spriteNum = 1;
+            super.spriteCounter++;
+            if(this.keyH.shiftPressed) {
+                if(super.spriteCounter > 5) {
+                    if(super.spriteNum == 1) {
+                        super.spriteNum = 2;
+                    } else if (super.spriteNum == 2) {
+                        super.spriteNum = 1;
                     }
-                    spriteCounter = 0;
+                    super.spriteCounter = 0;
                 }
             } else {
-                if(spriteCounter > 10) {
-                    if(spriteNum == 1) {
-                        spriteNum = 2;
-                    } else if (spriteNum == 2) {
-                        spriteNum = 1;
+                if(super.spriteCounter > 10) {
+                    if(super.spriteNum == 1) {
+                        super.spriteNum = 2;
+                    } else if (super.spriteNum == 2) {
+                        super.spriteNum = 1;
                     }
-                    spriteCounter = 0;
+                    super.spriteCounter = 0;
                 }
             }
 
             // Change sprite putting the second (running) if he was still (first was still, now he's in moving)
-            if(wasStill) {
-                spriteNum = 2;
-                wasStill = false;
+            if(super.wasStill) {
+                super.spriteNum = 2;
+                super.wasStill = false;
             }
 
 
         } else {
-            spriteNum = 1;
-            spriteCounter = 10;
-            wasStill = true;
+            super.spriteNum = 1;
+            super.spriteCounter = 10;
+            super.wasStill = true;
         }
     }
 
     public void pickUpObject(int index) {
         if(index != 999) {
-            String objName = gp.obj[index].name;
+            String objName = this.gp.obj[index].name;
 
             switch (objName) {
                 case "key00" -> {
-                    hasKey++;
-                    gp.obj[index] = null;
-                    System.out.println("key: " + hasKey);
+                    this.hasKey++;
+                    this.gp.obj[index] = null;
+                    System.out.println("key: " + this.hasKey);
                 }
                 case "door00" -> {
-                    if (hasKey > 0) {
-                        gp.obj[index] = null;
-                        hasKey--;
+                    if (this.hasKey > 0) {
+                        this.gp.obj[index] = null;
+                        this.hasKey--;
                         System.out.println("Door opened!!!");
-                        System.out.println("key: " + hasKey);
+                        System.out.println("key: " + this.hasKey);
                     } else
                         System.out.println("You don't have a key!!!");
                 }
@@ -181,40 +181,40 @@ public class Player extends Entity {
 
     public void paint(Graphics g2) {
         BufferedImage image = null;
-        switch (direction) {
+        switch (super.direction) {
             case "up" -> {
-                if (spriteNum == 1) {
-                    image = up1;
+                if (super.spriteNum == 1) {
+                    image = super.up1;
                 }
-                if (spriteNum == 2) {
-                    image = up2;
+                if (super.spriteNum == 2) {
+                    image = super.up2;
                 }
             }
             case "down" -> {
-                if (spriteNum == 1) {
-                    image = down1;
+                if (super.spriteNum == 1) {
+                    image = super.down1;
                 }
-                if (spriteNum == 2) {
-                    image = down2;
+                if (super.spriteNum == 2) {
+                    image = super.down2;
                 }
             }
             case "left" -> {
-                if (spriteNum == 1) {
-                    image = left1;
+                if (super.spriteNum == 1) {
+                    image = super.left1;
                 }
-                if (spriteNum == 2) {
-                    image = left2;
+                if (super.spriteNum == 2) {
+                    image = super.left2;
                 }
             }
             case "right" -> {
-                if (spriteNum == 1) {
-                    image = right1;
+                if (super.spriteNum == 1) {
+                    image = super.right1;
                 }
-                if (spriteNum == 2) {
-                    image = right2;
+                if (super.spriteNum == 2) {
+                    image = super.right2;
                 }
             }
         }
-        g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+        g2.drawImage(image, this.screenX, this.screenY, this.gp.tileSize, this.gp.tileSize, null);
     }
 }

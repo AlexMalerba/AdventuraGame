@@ -29,6 +29,7 @@ public class GamePanel extends JPanel implements Runnable {
     TileManager tileM = new TileManager(this);
     public SuperObject[] obj = new SuperObject[100];
     public AssetSetter aSetter = new AssetSetter(this);
+    public  UI ui = new UI(this);
 
     // World settings
     public final int maxWorldCol = 51;
@@ -108,7 +109,7 @@ public class GamePanel extends JPanel implements Runnable {
         }
 
         player.paint(g2);
-
+        ui.draw(g2);
         g2.dispose();
     }
 }

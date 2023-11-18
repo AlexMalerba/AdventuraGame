@@ -14,7 +14,7 @@ public class AdventureGame {
             window.setResizable(false); // Disables window resizing to maintain a fixed layout
             window.setTitle("Adventure Game"); // Sets the title of the window
 
-            // Creating the game panel
+            // Creating the game/menu panel
             GamePanel gamePanel = new GamePanel(); // Creates an object of type GamePanel named "gamePanel"
             MenuPanel menuPanel = new MenuPanel(gamePanel);
 
