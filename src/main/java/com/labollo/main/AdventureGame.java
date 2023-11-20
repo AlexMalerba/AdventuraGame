@@ -7,7 +7,10 @@ public class AdventureGame {
 
     public static void main(String[] args) {
 
+        // Invokes the code block inside a Swing event dispatch thread
+        // This ensures that Swing operations are safely executed in the UI thread
         SwingUtilities.invokeLater(() -> {
+
             // Creating the game window
             JFrame window = new JFrame(); // Creates an object of type JFrame named "window"
             window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Closes the window when the "EXIT" button is pressed
@@ -28,7 +31,7 @@ public class AdventureGame {
             gamePanel.startGameThread();
 
             // Configuring window dimensions and position
-            window.setSize(768, 576); // Sets the window dimensions: 768x576
+            window.setSize(gamePanel.screenWidth, gamePanel.screenHeight); // Sets the window dimensions: 768x576
             window.setLocationRelativeTo(null); // Sets the window to the center of the screen
             window.setVisible(true); // Sets the "window" object visible
             // Initially shows the game panel

@@ -1,6 +1,7 @@
 package com.labollo.main;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,7 +38,7 @@ public class MenuPanel extends JPanel {
 
         newGame.setBackground(new Color(0, 0, 0, 0)); // Set the fill color to transparent
         newGame.setForeground(Color.WHITE);
-
+        
         newGame.setBorderPainted(false);
         newGame.setFocusPainted(false);
         newGame.setContentAreaFilled(true);

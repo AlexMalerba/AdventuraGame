@@ -164,16 +164,15 @@ public class Player extends Entity {
                 case "key00" -> {
                     this.hasKey++;
                     this.gp.obj[index] = null;
-                    System.out.println("key: " + this.hasKey);
                 }
                 case "door00" -> {
                     if (this.hasKey > 0) {
                         this.gp.obj[index] = null;
                         this.hasKey--;
-                        System.out.println("Door opened!!!");
-                        System.out.println("key: " + this.hasKey);
-                    } else
-                        System.out.println("You don't have a key!!!");
+                    }
+                }
+                case "heart00" -> {
+                    this.gp.obj[index] = null;
                 }
             }
         }
