@@ -169,7 +169,8 @@ public class Player extends Entity {
                     if (this.hasKey > 0) {
                         this.gp.obj[index] = null;
                         this.hasKey--;
-                    }
+                    } else
+                        System.out.println("You don't have money!!!");
                 }
                 case "heart00" -> {
                     this.gp.obj[index] = null;

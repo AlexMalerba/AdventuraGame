@@ -15,7 +15,7 @@ public class AdventureGame {
             JFrame window = new JFrame(); // Creates an object of type JFrame named "window"
             window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Closes the window when the "EXIT" button is pressed
             window.setResizable(false); // Disables window resizing to maintain a fixed layout
-            window.setTitle("Adventure Game"); // Sets the title of the window
+            window.setTitle("The legend of sword "); // Sets the title of the window
 
             // Creating the game/menu panel
             GamePanel gamePanel = new GamePanel(); // Creates an object of type GamePanel named "gamePanel"
