@@ -6,6 +6,7 @@ import java.util.Objects;
 import static javax.imageio.ImageIO.read;
 
 public class OBJ_key extends SuperObject {
+
     public OBJ_key() {
         name = "key00";
         try {

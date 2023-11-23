@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Random;
 
 public class Player extends Entity {
     GamePanel gp;
@@ -42,6 +43,7 @@ public class Player extends Entity {
         super.worldY = 25 * gp.tileSize;
         super.speed = 4;
         super.direction = "down";
+        this.hasKey = 2;
     }
 
     // Create player's object via the sprites in path: /resources/player/
@@ -170,11 +172,35 @@ public class Player extends Entity {
                         this.gp.obj[index] = null;
                         this.hasKey--;
                     } else
-                        System.out.println("You don't have money!!!");
+                        System.out.println("You don't have key!!!");
                 }
-                case "heart00" -> {
-                    this.gp.obj[index] = null;
+                case "heart00" -> this.gp.obj[index] = null;
+                case "casketClosed00" -> {
+                    if (keyH.cPressed) {
+                        if (this.hasKey > 0) {
+                            Random rand = new Random();
+                            int num = Math.abs(rand.nextInt(2));
+                            System.out.println(num);
+
+                            this.gp.obj[index] = null;
+                            this.gp.obj[5].worldX = 12 * gp.tileSize;
+                            this.gp.obj[5].worldY = 34 * gp.tileSize;
+
+                            if (num == 0) {
+                                this.gp.obj[7].worldX = 12 * gp.tileSize;
+                                this.gp.obj[7].worldY = 36 * gp.tileSize;
+                            } else {
+                                this.gp.obj[6].worldX = 12 * gp.tileSize;
+                                this.gp.obj[6].worldY = 36 * gp.tileSize;
+                            }
+                            this.hasKey--;
+                        } else {
+                            System.out.println("You don't have key!!!");
+                        }
+                    }
+
                 }
+
             }
         }
     }

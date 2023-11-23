@@ -13,8 +13,8 @@ import java.awt.Toolkit;
 public class GamePanel extends JPanel implements Runnable {
 
     // Screen settings
-    final int originalTileSize = 16; // 16x16 tile
-    final int scale = 3; // to resize the tiles
+    public final int originalTileSize = 16; // 16x16 tile
+    public final int scale = 3; // to resize the tiles
     public final int tileSize = originalTileSize * scale; // 48x48 tile
 
     public final int maxScreenCol = 16; // Max number of columns
@@ -22,11 +22,11 @@ public class GamePanel extends JPanel implements Runnable {
     public final int screenWidth = tileSize * maxScreenCol; // 768 pixels
     public final int screenHeight = tileSize * maxScreenRow; // 576 pixels
 
-    Thread gameThread; // To create an object of type Thread
-    KeyHandler keyH = new KeyHandler(); // To create an object of type KeyHandler
+    public Thread gameThread; // To create an object of type Thread
+    public KeyHandler keyH = new KeyHandler(); // To create an object of type KeyHandler
     public CollisionChecker cChecker = new CollisionChecker(this);
     public Player player = new Player(this, keyH);
-    TileManager tileM = new TileManager(this);
+    public TileManager tileM = new TileManager(this);
     public SuperObject[] obj = new SuperObject[100];
     public AssetSetter aSetter = new AssetSetter(this);
     public  UI ui = new UI(this);
@@ -38,7 +38,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int worldHeight = tileSize * maxWorldRow;
 
     // FPS
-    int FPS = 60;
+    public int FPS = 60;
 
     // GamePanel constructor
     public GamePanel() {
@@ -49,67 +49,65 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void setupGame() {
-        aSetter.setObject();
+        this.aSetter.setObject();
     }
 
     public void startGameThread() {
-        gameThread = new Thread(this);
-        gameThread.start();
+        this.gameThread = new Thread(this);
+        this.gameThread.start();
         this.requestFocusInWindow(); // To set focus on game window
     }
 
     @Override
     public void run() {
-        double drawInterval = (double) 1000000000 / FPS; // The amount of time in nanoseconds between each frame
+        double drawInterval = (double) 1000000000 / this.FPS; // The amount of time in nanoseconds between each frame
         double delta = 0; // The amount of time until the next frame
         long lastTime = System.nanoTime(); // The time since the game started
         long currentTime; // The current time
-        long timer = 0; // The amount of time since the last time the FPS was printed
-        int drawCount = 0; // The number of frames drawn since the last time the FPS was printed
 
-        while (gameThread != null) { // While the game is running
-            currentTime = System.nanoTime(); // Get the current time
-
-            // Add the time since the last frame to the delta
-            delta += (currentTime - lastTime) / drawInterval;
-            timer += (currentTime - lastTime); // Add the time since the last frame to the timer
+        // While the game is running
+        while (this.gameThread != null) {
+            currentTime = System.nanoTime(); // Get the current time in nanoseconds
+            delta += (currentTime - lastTime) / drawInterval; // Add the time since the last frame to the delta
             lastTime = currentTime; // Update the last time
 
             if (delta >= 1) { // If it's time to draw a new frame
-                update();
-                repaint();
+
+                // Calls the update and repaint method 60 times of second
+
+                /* Calls the update method declared in GamePanel
+                   witch it calls the update method on the player object */
+                this.update(); // Update the player movement animation
+
+                /* Calls the repaint method declared in JComponent (Superclass of JPanel)
+                   witch calls the paintComponent method declared in GamePanel */
+                repaint(); // Requires the repaint of the component (JComponent) witch in a turn activate the paintComponent method
 
                 delta--;
-                drawCount++;
-            }
-
-            if (timer >= 1000000000) { // If it's been a second since the last time the FPS was printed
-                drawCount = 0;
-                timer = 0;
             }
         }
     }
 
     public void update() {
-        player.update();
+        this.player.update();
     }
 
     @Override
     public void paintComponent(Graphics g) {
         Toolkit.getDefaultToolkit().sync();
         super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D) g;
+        Graphics2D g2 = (Graphics2D) g; // Converts g from Graphics class to Graphics2D class To have a better check of the object
 
         tileM.paint(g2);
 
-        for(int i = 0; i< obj.length; i++) {
-            if(obj[i] != null) {
-                obj[i].draw(g2, this);
+        for(int i = 0; i < obj.length; i++) {
+            if(this.obj[i] != null) {
+                this.obj[i].draw(g2, this);
             }
         }
 
-        player.paint(g2);
-        ui.draw(g2);
+        this.player.paint(g2);
+        this.ui.draw(g2);
         g2.dispose();
     }
 }

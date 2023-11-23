@@ -9,7 +9,7 @@ public class OBJ_casketOpened extends SuperObject {
     public OBJ_casketOpened() {
         name = "casketOpened00";
         try {
-            image = read(Objects.requireNonNull(getClass().getResourceAsStream("/objects/casketOpen00.png")));
+            image = read(Objects.requireNonNull(getClass().getResourceAsStream("/objects/casketOpened00.png")));
         } catch (IOException e) {
             e.printStackTrace();
         }
