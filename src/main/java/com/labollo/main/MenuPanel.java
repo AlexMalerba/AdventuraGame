@@ -17,7 +17,7 @@ public class MenuPanel extends JPanel {
         // Add a background like JLabel
         ImageIcon backgroundImage = new ImageIcon(Objects.requireNonNull(MenuPanel.class.getResource("/menu/menu00.png")));
         JLabel backgroundLabel = new JLabel(backgroundImage);
-        backgroundLabel.setBounds(0, 0, 768, 576); // Set the dimension of the background
+        backgroundLabel.setBounds(0, 0, 768 , 576); // Set the dimension of the background
         add(backgroundLabel);
 
         // Create the "New Game" button and move it to the center of the screen

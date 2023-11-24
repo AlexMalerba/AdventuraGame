@@ -163,10 +163,13 @@ public class Player extends Entity {
             String objName = this.gp.obj[index].name;
 
             switch (objName) {
+                case "potion00", "potion01" -> this.gp.obj[index] = null;
+
                 case "key00" -> {
                     this.hasKey++;
                     this.gp.obj[index] = null;
                 }
+
                 case "door00" -> {
                     if (this.hasKey > 0) {
                         this.gp.obj[index] = null;
@@ -174,7 +177,6 @@ public class Player extends Entity {
                     } else
                         System.out.println("You don't have key!!!");
                 }
-                case "heart00" -> this.gp.obj[index] = null;
                 case "casketClosed00" -> {
                     if (keyH.cPressed) {
                         if (this.hasKey > 0) {
@@ -187,11 +189,17 @@ public class Player extends Entity {
                             this.gp.obj[5].worldY = 34 * gp.tileSize;
 
                             if (num == 0) {
-                                this.gp.obj[7].worldX = 12 * gp.tileSize;
-                                this.gp.obj[7].worldY = 36 * gp.tileSize;
+                                if (this.gp.obj[6] != null) {
+                                    this.gp.obj[6].worldX = 12 * gp.tileSize;
+                                    this.gp.obj[6].worldY = 36 * gp.tileSize;
+                                } else
+                                    System.out.println("a");
                             } else {
-                                this.gp.obj[6].worldX = 12 * gp.tileSize;
-                                this.gp.obj[6].worldY = 36 * gp.tileSize;
+                                if (this.gp.obj[7] != null) {
+                                    this.gp.obj[7].worldX = 12 * gp.tileSize;
+                                    this.gp.obj[7].worldY = 36 * gp.tileSize;
+                                } else
+                                    System.out.println("b");
                             }
                             this.hasKey--;
                         } else {
