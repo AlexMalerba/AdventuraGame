@@ -185,19 +185,19 @@ public class Player extends Entity {
                             System.out.println(num);
 
                             this.gp.obj[index] = null;
-                            this.gp.obj[5].worldX = 12 * gp.tileSize;
-                            this.gp.obj[5].worldY = 34 * gp.tileSize;
+                            //this.gp.obj[5].worldX = 12 * gp.tileSize;
+                            //this.gp.obj[5].worldY = 34 * gp.tileSize;
 
                             if (num == 0) {
                                 if (this.gp.obj[6] != null) {
-                                    this.gp.obj[6].worldX = 12 * gp.tileSize;
-                                    this.gp.obj[6].worldY = 36 * gp.tileSize;
+                                    //this.gp.obj[6].worldX = 12 * gp.tileSize;
+                                    //this.gp.obj[6].worldY = 36 * gp.tileSize;
                                 } else
                                     System.out.println("a");
                             } else {
                                 if (this.gp.obj[7] != null) {
-                                    this.gp.obj[7].worldX = 12 * gp.tileSize;
-                                    this.gp.obj[7].worldY = 36 * gp.tileSize;
+                                    //this.gp.obj[7].worldX = 12 * gp.tileSize;
+                                    //this.gp.obj[7].worldY = 36 * gp.tileSize;
                                 } else
                                     System.out.println("b");
                             }
