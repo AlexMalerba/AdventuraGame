@@ -7,7 +7,7 @@ public class AdventureGame {
 
     public static void main(String[] args) {
 
-        // Invokes the code block inside a Swing event dispatch thread
+        // Invokes the code block inside a Swing event dispatch threadss
         // This ensures that Swing operations are safely executed in the UI thread
         SwingUtilities.invokeLater(() -> {
 
