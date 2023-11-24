@@ -2,6 +2,8 @@ package com.labollo.entity;
 
 import com.labollo.main.GamePanel;
 import com.labollo.main.KeyHandler;
+import com.labollo.object.OBJ_potion00;
+import com.labollo.object.OBJ_potion01;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -17,6 +19,7 @@ public class Player extends Entity {
     public final int screenX;
     public final int screenY;
     public int hasKey = 0;
+    private boolean chestOpenedThisIteration = false;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
@@ -39,11 +42,11 @@ public class Player extends Entity {
     }
 
     public void setDefaultValues() {
-        super.worldX = 25 * gp.tileSize;
-        super.worldY = 25 * gp.tileSize;
+        super.worldX = 63 * gp.tileSize;
+        super.worldY = 23 * gp.tileSize;
         super.speed = 4;
         super.direction = "down";
-        this.hasKey = 2;
+        this.hasKey = 5;
     }
 
     // Create player's object via the sprites in path: /resources/player/
@@ -71,6 +74,7 @@ public class Player extends Entity {
      * Manages player sprite animations based on movement.
      */
     public void update() {
+        chestOpenedThisIteration = false;
 
         // Check if any key is pressed
         if(this.keyH.upPressed || this.keyH.downPressed || this.keyH.leftPressed || this.keyH.rightPressed) {
@@ -159,7 +163,7 @@ public class Player extends Entity {
     }
 
     public void pickUpObject(int index) {
-        if(index != 999) {
+        if (index != 999 && this.gp.obj[index] != null) {
             String objName = this.gp.obj[index].name;
 
             switch (objName) {
@@ -175,44 +179,54 @@ public class Player extends Entity {
                         this.gp.obj[index] = null;
                         this.hasKey--;
                     } else
-                        System.out.println("You don't have key!!!");
+                        System.out.println("You don't have the key!!!");
                 }
                 case "casketClosed00" -> {
                     if (keyH.cPressed) {
                         if (this.hasKey > 0) {
                             Random rand = new Random();
                             int num = Math.abs(rand.nextInt(2));
-                            System.out.println(num);
+
+                            // Ottieni le coordinate dello scrigno chiuso
+                            int closedChestX = this.gp.obj[index].worldX;
+                            int closedChestY = this.gp.obj[index].worldY;
 
                             this.gp.obj[index] = null;
-                            //this.gp.obj[5].worldX = 12 * gp.tileSize;
-                            //this.gp.obj[5].worldY = 34 * gp.tileSize;
+
+                            // Assicurati che l'oggetto a cui stai cercando di accedere non sia null
+                            if (this.gp.obj[5] != null) {
+                                // Imposta le coordinate dello scrigno aperto
+                                this.gp.obj[5].worldX = closedChestX;
+                                this.gp.obj[5].worldY = closedChestY;
+                            }
 
                             if (num == 0) {
-                                if (this.gp.obj[6] != null) {
-                                    //this.gp.obj[6].worldX = 12 * gp.tileSize;
-                                    //this.gp.obj[6].worldY = 36 * gp.tileSize;
+                                if (this.gp.obj[6] == null) {
+                                    System.out.println("sss");
+                                    this.gp.obj[6] = new OBJ_potion00();
+                                    this.gp.obj[6].worldX = closedChestX;
+                                    this.gp.obj[6].worldY = closedChestY + gp.tileSize * 2;
                                 } else
                                     System.out.println("a");
                             } else {
-                                if (this.gp.obj[7] != null) {
-                                    //this.gp.obj[7].worldX = 12 * gp.tileSize;
-                                    //this.gp.obj[7].worldY = 36 * gp.tileSize;
+                                if (this.gp.obj[7] == null) {
+                                    System.out.println("ssssss");
+                                    this.gp.obj[7] = new OBJ_potion01();
+                                    this.gp.obj[7].worldX = closedChestX;
+                                    this.gp.obj[7].worldY = closedChestY + gp.tileSize * 2;
                                 } else
                                     System.out.println("b");
                             }
                             this.hasKey--;
                         } else {
-                            System.out.println("You don't have key!!!");
+                            System.out.println("You don't have the key!!!");
                         }
                     }
-
                 }
 
             }
         }
     }
-
     public void paint(Graphics g2) {
         BufferedImage image = null;
         switch (super.direction) {
