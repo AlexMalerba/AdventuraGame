@@ -46,7 +46,7 @@ public class Player extends Entity {
         super.worldY = 23 * gp.tileSize;
         super.speed = 4;
         super.direction = "down";
-        this.hasKey = 5;
+        this.hasKey = 0;
     }
 
     // Create player's object via the sprites in path: /resources/player/
