@@ -3,6 +3,7 @@ package com.labollo.main;
 import com.labollo.object.*;
 
 public class AssetSetter {
+    // Properties of com.labollo package
     GamePanel gp;
 
     public AssetSetter(GamePanel gp) {
@@ -35,8 +36,8 @@ public class AssetSetter {
         gp.obj[3].worldY = 19 * gp.tileSize;
 
         gp.obj[4] = new OBJ_heart00();
-        gp.obj[5] = new OBJ_casketOpened00();
 
+        gp.obj[5] = new OBJ_casketOpened00();
         gp.obj[6] = new OBJ_potion00();
         gp.obj[7] = new OBJ_potion01();
     }

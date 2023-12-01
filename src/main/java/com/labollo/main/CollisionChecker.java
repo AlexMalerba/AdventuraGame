@@ -5,6 +5,7 @@ import com.labollo.entity.Entity;
 import java.util.Objects;
 
 public class CollisionChecker {
+    // Properties of com.labollo package
     GamePanel gp;
 
     public CollisionChecker(GamePanel gp) {

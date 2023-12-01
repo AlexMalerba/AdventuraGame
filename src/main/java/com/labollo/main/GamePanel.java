@@ -12,6 +12,7 @@ import java.awt.Toolkit;
 
 public class GamePanel extends JPanel implements Runnable {
 
+    // Properties of this class
     // Screen settings
     public final int originalTileSize = 16; // 16x16 tile
     public final int scale = 3; // to resize the tiles
@@ -22,23 +23,26 @@ public class GamePanel extends JPanel implements Runnable {
     public final int screenWidth = tileSize * maxScreenCol; // 768 pixels
     public final int screenHeight = tileSize * maxScreenRow; // 576 pixels
 
+    // World settings
+    public final int maxWorldCol = 80; // Columns number of the map: map02.tmx
+    public final int maxWorldRow = 80; // Rows number of the map: map02.tmx
+    public final int worldWidth = tileSize * maxWorldCol; // Width expressed in pixels (3840px)
+    public final int worldHeight = tileSize * maxWorldRow; // Width expressed in pixels (3840px)
+
+    // FPS
+    public int FPS = 60; // The startGameThread method will be called 60 times per second
+
+    // Properties of JDK
     public Thread gameThread; // To create an object of type Thread
-    public KeyHandler keyH = new KeyHandler(); // To create an object of type KeyHandler
+
+    // Properties of com.labollo package
+    public KeyHandler keyH = new KeyHandler();
     public CollisionChecker cChecker = new CollisionChecker(this);
     public Player player = new Player(this, keyH);
     public TileManager tileM = new TileManager(this);
     public SuperObject[] obj = new SuperObject[100];
     public AssetSetter aSetter = new AssetSetter(this);
-    public  UI ui = new UI(this);
-
-    // World settings
-    public final int maxWorldCol = 80;
-    public final int maxWorldRow = 80;
-    public final int worldWidth = tileSize * maxWorldCol;
-    public final int worldHeight = tileSize * maxWorldRow;
-
-    // FPS
-    public int FPS = 60;
+    public UI ui = new UI(this);
 
     // GamePanel constructor
     public GamePanel() {
@@ -100,8 +104,8 @@ public class GamePanel extends JPanel implements Runnable {
 
         tileM.paint(g2);
 
-        for(int i = 0; i < obj.length; i++) {
-            if(this.obj[i] != null) {
+        for (int i = 0; i < obj.length; i++) {
+            if (this.obj[i] != null) {
                 this.obj[i].draw(g2, this);
             }
         }

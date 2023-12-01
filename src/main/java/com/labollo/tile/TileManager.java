@@ -3,7 +3,7 @@ package com.labollo.tile;
 import com.labollo.main.GamePanel;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
+import java.awt.Graphics2D;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;

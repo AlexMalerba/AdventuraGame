@@ -1,8 +1,10 @@
 package com.labollo.main;
 
-import javax.swing.*;
-import javax.swing.border.Border;
-import java.awt.*;
+import javax.swing.JPanel;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Font;
@@ -43,8 +45,8 @@ public class MenuPanel extends JPanel {
         newGame.setFocusPainted(false);
         newGame.setContentAreaFilled(true);
 
-        int buttonWidth = 250;
-        int buttonHeight = 100;
+        int buttonWidth = 200;
+        int buttonHeight = 60;
         int buttonX = (gamePanel.screenWidth - buttonWidth) / 2;
         int buttonY = (gamePanel.screenHeight - buttonHeight) / 2;
         newGame.setBounds(buttonX, buttonY, buttonWidth, buttonHeight);

@@ -1,9 +1,10 @@
 package com.labollo.entity;
 
-import java.awt.*;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 public class Entity {
+    // Properties of this class
     public int worldX, worldY;
     public int speed;
 

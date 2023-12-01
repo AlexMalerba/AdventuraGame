@@ -2,20 +2,21 @@ package com.labollo.entity;
 
 import com.labollo.main.GamePanel;
 import com.labollo.main.KeyHandler;
-import com.labollo.object.OBJ_potion00;
-import com.labollo.object.OBJ_potion01;
-
 import javax.imageio.ImageIO;
-import java.awt.*;
+import java.awt.Rectangle;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.Random;
 
 public class Player extends Entity {
+    // Properties of com.labollo package
     GamePanel gp;
     KeyHandler keyH;
 
+    // Properties of this class
     public final int screenX;
     public final int screenY;
     public int hasKey = 0;
@@ -195,63 +196,22 @@ public class Player extends Entity {
                             this.gp.obj[5].worldY = closedChestY;
 
                             if (num == 0) {
-                                    this.gp.obj[6] = new OBJ_potion00();
                                     this.gp.obj[6].worldX = closedChestX;
-                                    this.gp.obj[6].worldY = closedChestY;
-                                    System.out.println(this.gp.obj[6].worldX);
-                                    System.out.println(this.gp.obj[6].worldY);
+                                    this.gp.obj[6].worldY = closedChestY + 2 * gp.tileSize;
+                                    System.out.println("P1");
+                                    System.out.println("X: "+this.gp.obj[6].worldX);
+                                    System.out.println("Y: "+this.gp.obj[6].worldY);
                             } else {
-                                    this.gp.obj[7] = new OBJ_potion01();
                                     this.gp.obj[7].worldX = closedChestX;
-                                    this.gp.obj[7].worldY = closedChestY;
-                                    System.out.println(this.gp.obj[7].worldX);
-                                    System.out.println(this.gp.obj[7].worldY);
+                                    this.gp.obj[7].worldY = closedChestY + 2 * gp.tileSize;
+                                    System.out.println("P2");
+                                    System.out.println("X: "+this.gp.obj[7].worldX);
+                                    System.out.println("Y: "+this.gp.obj[7].worldY);
                             }
                             this.hasKey--;
                         }
                     }
-                }/*
-                case "casketClosed00" -> {
-                    if (keyH.cPressed) {
-                        if (this.hasKey > 0) {
-                            Random rand = new Random();
-                            int num = Math.abs(rand.nextInt(2));
-
-                            // Ottieni le coordinate dello scrigno chiuso
-                            int closedChestX = this.gp.obj[index].worldX;
-                            int closedChestY = this.gp.obj[index].worldY;
-
-                            this.gp.obj[index] = null;
-
-                            // Assicurati che l'oggetto a cui stai cercando di accedere non sia null
-                            if (this.gp.obj[5] != null) {
-                                // Imposta le coordinate dello scrigno aperto
-                                this.gp.obj[5].worldX = closedChestX;
-                                this.gp.obj[5].worldY = closedChestY;
-                            }
-
-                            if (num == 0) {
-                                if (this.gp.obj[6] == null) {
-                                    this.gp.obj[6] = new OBJ_potion00();
-                                    this.gp.obj[6].worldX = closedChestX;
-                                    this.gp.obj[6].worldY = closedChestY + gp.tileSize * 2;
-                                } else
-                                    System.out.println("a");
-                            } else {
-                                if (this.gp.obj[7] == null) {
-                                    this.gp.obj[7] = new OBJ_potion01();
-                                    this.gp.obj[7].worldX = closedChestX;
-                                    this.gp.obj[7].worldY = closedChestY + gp.tileSize * 2;
-                                } else
-                                    System.out.println("b");
-                            }
-                            this.hasKey--;
-                        } else {
-                            System.out.println("You don't have the key!!!");
-                        }
-                    }
-                }*/
-
+                }
             }
         }
     }

@@ -1,9 +1,14 @@
 package com.labollo.main;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.SwingUtilities;
+import javax.swing.JFrame;
+import java.awt.CardLayout;
 
 public class AdventureGame {
+
+    // Properties of this class
+    public static GamePanel gamePanel = new GamePanel(); // Creates an object of type GamePanel named "gamePanel"
+    public static MenuPanel menuPanel = new MenuPanel(gamePanel); // Creates an object of type MenuPanel named "menuPanel"
 
     public static void main(String[] args) {
 
@@ -16,10 +21,6 @@ public class AdventureGame {
             window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Closes the window when the "EXIT" button is pressed
             window.setResizable(false); // Disables window resizing to maintain a fixed layout
             window.setTitle("The legend of sword "); // Sets the title of the window
-
-            // Creating the game/menu panel
-            GamePanel gamePanel = new GamePanel(); // Creates an object of type GamePanel named "gamePanel"
-            MenuPanel menuPanel = new MenuPanel(gamePanel);
 
             // Configuring the window layout using a CardLayout
             window.setLayout(new CardLayout()); // Sets a CardLayout as the layout manager to handle panels in the window
