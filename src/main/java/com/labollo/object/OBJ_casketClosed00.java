@@ -15,6 +15,6 @@ public class OBJ_casketClosed00 extends SuperObject {
             System.err.println("Error loading image: " + name);
             e.printStackTrace();
         }
-        collision = true;
+        super.collision = true;
     }
 }

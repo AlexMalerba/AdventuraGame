@@ -46,7 +46,7 @@ public class Player extends Entity {
         super.worldY = 23 * gp.tileSize;
         super.speed = 4;
         super.direction = "down";
-        this.hasKey = 0;
+        this.hasKey = 5;
     }
 
     // Create player's object via the sprites in path: /resources/player/
@@ -182,6 +182,36 @@ public class Player extends Entity {
                         System.out.println("You don't have the key!!!");
                 }
                 case "casketClosed00" -> {
+                    if(keyH.cPressed) {
+                        if(this.hasKey > 0) {
+                            Random rand = new Random();
+                            int num = Math.abs(rand.nextInt(2));
+
+                            int closedChestX = this.gp.obj[index].worldX;
+                            int closedChestY = this.gp.obj[index].worldY;
+
+                            this.gp.obj[index] = null;
+                            this.gp.obj[5].worldX = closedChestX;
+                            this.gp.obj[5].worldY = closedChestY;
+
+                            if (num == 0) {
+                                    this.gp.obj[6] = new OBJ_potion00();
+                                    this.gp.obj[6].worldX = closedChestX;
+                                    this.gp.obj[6].worldY = closedChestY;
+                                    System.out.println(this.gp.obj[6].worldX);
+                                    System.out.println(this.gp.obj[6].worldY);
+                            } else {
+                                    this.gp.obj[7] = new OBJ_potion01();
+                                    this.gp.obj[7].worldX = closedChestX;
+                                    this.gp.obj[7].worldY = closedChestY;
+                                    System.out.println(this.gp.obj[7].worldX);
+                                    System.out.println(this.gp.obj[7].worldY);
+                            }
+                            this.hasKey--;
+                        }
+                    }
+                }/*
+                case "casketClosed00" -> {
                     if (keyH.cPressed) {
                         if (this.hasKey > 0) {
                             Random rand = new Random();
@@ -202,7 +232,6 @@ public class Player extends Entity {
 
                             if (num == 0) {
                                 if (this.gp.obj[6] == null) {
-                                    System.out.println("sss");
                                     this.gp.obj[6] = new OBJ_potion00();
                                     this.gp.obj[6].worldX = closedChestX;
                                     this.gp.obj[6].worldY = closedChestY + gp.tileSize * 2;
@@ -210,7 +239,6 @@ public class Player extends Entity {
                                     System.out.println("a");
                             } else {
                                 if (this.gp.obj[7] == null) {
-                                    System.out.println("ssssss");
                                     this.gp.obj[7] = new OBJ_potion01();
                                     this.gp.obj[7].worldX = closedChestX;
                                     this.gp.obj[7].worldY = closedChestY + gp.tileSize * 2;
@@ -222,7 +250,7 @@ public class Player extends Entity {
                             System.out.println("You don't have the key!!!");
                         }
                     }
-                }
+                }*/
 
             }
         }
