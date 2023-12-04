@@ -17,4 +17,9 @@ public class OBJ_key00 extends SuperObject {
         }
         collision = true;
     }
+
+    @Override
+    public void status(int status) {
+
+    }
 }

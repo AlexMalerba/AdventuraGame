@@ -17,4 +17,8 @@ public class OBJ_heart00 extends SuperObject {
         }
         collision = true;
     }
+    @Override
+    public void status(int status) {
+
+    }
 }

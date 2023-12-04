@@ -17,4 +17,8 @@ public class OBJ_potion01 extends SuperObject {
         }
         collision = true;
     }
+    @Override
+    public void status(int status) {
+
+    }
 }

@@ -16,4 +16,8 @@ public class OBJ_door00 extends SuperObject {
         }
         collision = true;
     }
+    @Override
+    public void status(int status) {
+
+    }
 }

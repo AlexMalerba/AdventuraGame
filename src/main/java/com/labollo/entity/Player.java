@@ -154,8 +154,6 @@ public class Player extends Entity {
                 super.spriteNum = 2;
                 super.wasStill = false;
             }
-
-
         } else {
             super.spriteNum = 1;
             super.spriteCounter = 10;
@@ -182,33 +180,29 @@ public class Player extends Entity {
                     } else
                         System.out.println("You don't have the key!!!");
                 }
-                case "casketClosed00" -> {
-                    if(keyH.cPressed) {
-                        if(this.hasKey > 0) {
-                            Random rand = new Random();
-                            int num = Math.abs(rand.nextInt(2));
+                case "casket00" -> {
+                    if(gp.obj[index].status == 0) {
+                        if (keyH.cPressed) {
+                            if (this.hasKey > 0) {
+                                Random rand = new Random();
+                                int num = Math.abs(rand.nextInt(2));
 
-                            int closedChestX = this.gp.obj[index].worldX;
-                            int closedChestY = this.gp.obj[index].worldY;
+                                gp.obj[index].status(1);
 
-                            this.gp.obj[index] = null;
-                            this.gp.obj[5].worldX = closedChestX;
-                            this.gp.obj[5].worldY = closedChestY;
-
-                            if (num == 0) {
-                                    this.gp.obj[6].worldX = closedChestX;
-                                    this.gp.obj[6].worldY = closedChestY + 2 * gp.tileSize;
+                                if (num == 0) {
+                                    this.gp.obj[6].worldX = gp.obj[index].worldX;
+                                    this.gp.obj[6].worldY = gp.obj[index].worldY + 2 * gp.tileSize;
                                     System.out.println("P1");
-                                    System.out.println("X: "+this.gp.obj[6].worldX);
-                                    System.out.println("Y: "+this.gp.obj[6].worldY);
-                            } else {
-                                    this.gp.obj[7].worldX = closedChestX;
-                                    this.gp.obj[7].worldY = closedChestY + 2 * gp.tileSize;
+                                    System.out.println("X: " + this.gp.obj[6].worldX);
+                                    System.out.println("Y: " + this.gp.obj[6].worldY);
+                                } else {
+                                    this.gp.obj[7].worldX = gp.obj[index].worldX;
+                                    this.gp.obj[7].worldY = gp.obj[index].worldY + 2 * gp.tileSize;
                                     System.out.println("P2");
-                                    System.out.println("X: "+this.gp.obj[7].worldX);
-                                    System.out.println("Y: "+this.gp.obj[7].worldY);
+                                    System.out.println("X: " + this.gp.obj[7].worldX);
+                                    System.out.println("Y: " + this.gp.obj[7].worldY);
+                                }
                             }
-                            this.hasKey--;
                         }
                     }
                 }
