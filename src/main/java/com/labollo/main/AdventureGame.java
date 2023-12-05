@@ -17,7 +17,7 @@ public class AdventureGame {
         SwingUtilities.invokeLater(() -> {
 
             // Creating the game window
-            JFrame window = new JFrame(); // Creates an object of type JFrame named "window"
+            JFrame window = new JFrame(); // Create an object of type JFrame named "window"
             window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Closes the window when the "EXIT" button is pressed
             window.setResizable(false); // Disables window resizing to maintain a fixed layout
             window.setTitle("The legend of sword"); // Sets the title of the window

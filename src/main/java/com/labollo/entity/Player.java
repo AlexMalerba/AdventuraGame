@@ -20,7 +20,7 @@ public class Player extends Entity {
     public final int screenX;
     public final int screenY;
     public int hasKey = 0;
-    private boolean chestOpenedThisIteration = false;
+    //private boolean chestOpenedThisIteration = false;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
@@ -75,7 +75,7 @@ public class Player extends Entity {
      * Manages player sprite animations based on movement.
      */
     public void update() {
-        chestOpenedThisIteration = false;
+        //chestOpenedThisIteration = false;
 
         // Check if any key is pressed
         if(this.keyH.upPressed || this.keyH.downPressed || this.keyH.leftPressed || this.keyH.rightPressed) {
@@ -209,7 +209,7 @@ public class Player extends Entity {
             }
         }
     }
-    public void paint(Graphics g2) {
+    public void draw(Graphics g2) {
         BufferedImage image = null;
         switch (super.direction) {
             case "up" -> {

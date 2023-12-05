@@ -102,7 +102,7 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g; // Converts g from Graphics class to Graphics2D class To have a better check of the object
 
-        tileM.paint(g2);
+        tileM.draw(g2);
 
         for (int i = 0; i < obj.length; i++) {
             if (this.obj[i] != null) {
@@ -110,7 +110,7 @@ public class GamePanel extends JPanel implements Runnable {
             }
         }
 
-        this.player.paint(g2);
+        this.player.draw(g2);
         this.ui.draw(g2);
         g2.dispose();
     }
