@@ -30,7 +30,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int worldHeight = tileSize * maxWorldRow; // Width expressed in pixels (3840px)
 
     // FPS
-    public int FPS = 60; // The startGameThread method will be called 60 times per second
+    public final int FPS = 60; // The startGameThread method will be called 60 times per second
 
     // Properties of JDK
     public Thread gameThread; // To create an object of type Thread

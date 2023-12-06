@@ -2,6 +2,8 @@ package com.labollo.entity;
 
 import com.labollo.main.GamePanel;
 import com.labollo.main.KeyHandler;
+import com.labollo.object.OBJ_potion00;
+
 import javax.imageio.ImageIO;
 import java.awt.Rectangle;
 import java.awt.Graphics;

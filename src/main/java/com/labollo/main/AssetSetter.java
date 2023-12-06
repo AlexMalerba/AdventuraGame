@@ -12,14 +12,17 @@ public class AssetSetter {
 
     public void setObject() {
         this.gp.obj[0] = new OBJ_casket00();
+        this.gp.obj[0].status(0);
         this.gp.obj[0].worldX = 64 * gp.tileSize;
         this.gp.obj[0].worldY = 16 * gp.tileSize;
 
         this.gp.obj[10] = new OBJ_casket00();
+        this.gp.obj[10].status(0);
         this.gp.obj[10].worldX = 63 * gp.tileSize;
         this.gp.obj[10].worldY = 16 * gp.tileSize;
 
         this.gp.obj[8] = new OBJ_casket00();
+        this.gp.obj[8].status(0);
         this.gp.obj[8].worldX = 62 * gp.tileSize;
         this.gp.obj[8].worldY = 16 * gp.tileSize;
 
