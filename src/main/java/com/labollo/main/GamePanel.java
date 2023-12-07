@@ -14,20 +14,20 @@ public class GamePanel extends JPanel implements Runnable {
 
     // Properties of this class
     // Screen settings
-    public final int originalTileSize = 16; // 16x16 tile
-    public final int scale = 3; // to resize the tiles
-    public final int tileSize = originalTileSize * scale; // 48x48 tile
+    public final int ORIGINAL_TILE_SIZE = 16; // 16x16 tile
+    public final int SCALE = 3; // to resize the tiles
+    public final int TILE_SIZE = ORIGINAL_TILE_SIZE * SCALE; // 48x48 tile
 
-    public final int maxScreenCol = 16; // Max number of columns
-    public final int maxScreenRow = 12; // Max number of rows
-    public final int screenWidth = tileSize * maxScreenCol; // 768 pixels
-    public final int screenHeight = tileSize * maxScreenRow; // 576 pixels
+    public final int MAX_SCREEN_COL = 16; // Max number of columns
+    public final int MAX_SCREEN_ROW = 12; // Max number of rows
+    public final int SCREEN_WIDTH = TILE_SIZE * MAX_SCREEN_COL; // 768 pixels
+    public final int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREEN_ROW; // 576 pixels
 
     // World settings
-    public final int maxWorldCol = 80; // Columns number of the map: map02.tmx
-    public final int maxWorldRow = 80; // Rows number of the map: map02.tmx
-    public final int worldWidth = tileSize * maxWorldCol; // Width expressed in pixels (3840px)
-    public final int worldHeight = tileSize * maxWorldRow; // Width expressed in pixels (3840px)
+    public final int MAX_WORLD_COL = 80; // Columns number of the map: map02.tmx
+    public final int MAX_WORLD_ROW = 80; // Rows number of the map: map02.tmx
+//    public final int WORLD_WIDTH = TILE_SIZE * MAX_WORLD_COL; // Width expressed in pixels (3840px)
+//    public final int WORLD_HEIGHT = TILE_SIZE * MAX_WORLD_ROW; // Width expressed in pixels (3840px)
 
     // FPS
     public final int FPS = 60; // The startGameThread method will be called 60 times per second
@@ -46,7 +46,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     // GamePanel constructor
     public GamePanel() {
-        this.setPreferredSize(new Dimension(screenWidth, screenHeight)); // To set your preferred panel size
+        this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT)); // To set your preferred panel size
         this.setDoubleBuffered(true); // To improve the graphics experience
         this.addKeyListener(keyH); // To hear which key is pressed
         this.setFocusable(true); // To enable the ability to receive input
@@ -77,7 +77,7 @@ public class GamePanel extends JPanel implements Runnable {
 
             if (delta >= 1) { // If it's time to draw a new frame
 
-                // Calls the update and repaint method 60 times of second
+                // Calls the update and repaint methods 60 times of second
 
                 /* Calls the update method declared in GamePanel
                    witch it calls the update method on the player object */
@@ -104,9 +104,9 @@ public class GamePanel extends JPanel implements Runnable {
 
         tileM.draw(g2);
 
-        for (int i = 0; i < obj.length; i++) {
-            if (this.obj[i] != null) {
-                this.obj[i].draw(g2, this);
+        for (SuperObject superObject : obj) {
+            if (superObject != null) {
+                superObject.draw(g2, this);
             }
         }
 

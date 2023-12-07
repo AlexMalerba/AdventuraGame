@@ -2,7 +2,6 @@ package com.labollo.entity;
 
 import com.labollo.main.GamePanel;
 import com.labollo.main.KeyHandler;
-import com.labollo.object.OBJ_potion00;
 
 import javax.imageio.ImageIO;
 import java.awt.Rectangle;
@@ -28,8 +27,8 @@ public class Player extends Entity {
         this.gp = gp;
         this.keyH = keyH;
 
-        screenX = this.gp.screenWidth / 2 - (this.gp.tileSize / 2);
-        screenY = this.gp.screenHeight / 2 - (this.gp.tileSize / 2);
+        screenX = this.gp.SCREEN_WIDTH / 2 - (this.gp.TILE_SIZE / 2);
+        screenY = this.gp.SCREEN_HEIGHT / 2 - (this.gp.TILE_SIZE / 2);
 
         super.solidArea = new Rectangle();
         super.solidArea.x = 25;
@@ -45,8 +44,8 @@ public class Player extends Entity {
     }
 
     public void setDefaultValues() {
-        super.worldX = 63 * gp.tileSize;
-        super.worldY = 23 * gp.tileSize;
+        super.worldX = 63 * gp.TILE_SIZE; // 63 * 48 = 3024
+        super.worldY = 23 * gp.TILE_SIZE; // 23 * 48 = 1104
         super.speed = 4;
         super.direction = "down";
         this.hasKey = 5;
@@ -193,13 +192,13 @@ public class Player extends Entity {
 
                                 if (num == 0) {
                                     this.gp.obj[6].worldX = gp.obj[index].worldX;
-                                    this.gp.obj[6].worldY = gp.obj[index].worldY + 2 * gp.tileSize;
+                                    this.gp.obj[6].worldY = gp.obj[index].worldY + 2 * gp.TILE_SIZE;
                                     System.out.println("P1");
                                     System.out.println("X: " + this.gp.obj[6].worldX);
                                     System.out.println("Y: " + this.gp.obj[6].worldY);
                                 } else {
                                     this.gp.obj[7].worldX = gp.obj[index].worldX;
-                                    this.gp.obj[7].worldY = gp.obj[index].worldY + 2 * gp.tileSize;
+                                    this.gp.obj[7].worldY = gp.obj[index].worldY + 2 * gp.TILE_SIZE;
                                     System.out.println("P2");
                                     System.out.println("X: " + this.gp.obj[7].worldX);
                                     System.out.println("Y: " + this.gp.obj[7].worldY);
@@ -247,6 +246,6 @@ public class Player extends Entity {
                 }
             }
         }
-        g2.drawImage(image, this.screenX, this.screenY, this.gp.tileSize, this.gp.tileSize, null);
+        g2.drawImage(image, this.screenX, this.screenY, this.gp.TILE_SIZE, this.gp.TILE_SIZE, null);
     }
 }

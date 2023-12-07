@@ -4,11 +4,9 @@ import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JButton;
-import java.awt.Color;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.Font;
-import java.awt.GraphicsEnvironment;
 import java.util.Objects;
 
 public class MenuPanel extends JPanel {
@@ -19,40 +17,34 @@ public class MenuPanel extends JPanel {
         // Add a background like JLabel
         ImageIcon backgroundImage = new ImageIcon(Objects.requireNonNull(MenuPanel.class.getResource("/menu/menu00.png")));
         JLabel backgroundLabel = new JLabel(backgroundImage);
-        backgroundLabel.setBounds(0, 0, gamePanel.screenWidth , gamePanel.screenHeight); // Set the dimension of the background
-        add(backgroundLabel);
 
-        // Create the "New Game" button and move it to the center of the screen
-        JButton newGame = new JButton("New Game");
+        backgroundLabel.setBounds(0, 0, gamePanel.SCREEN_WIDTH, gamePanel.SCREEN_HEIGHT); // Set the dimension of the background
+        add(backgroundLabel); // Add backgroundPanel to the window
 
-        // Load the custom font
-        try {
-            Font customFont = Font.createFont(Font.TRUETYPE_FONT, Objects.requireNonNull(MenuPanel.class.getResourceAsStream("/fonts/04B_03__.TTF")));
-            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(customFont);
+        // New Game button
+        JButton newGame = new JButton("New Game"); // Create a button with the text: New Game
 
-            // Set the custom font for the button
-            newGame.setFont(new Font(customFont.getName(), Font.PLAIN, 30));
-        } catch (Exception e) {
-            e.printStackTrace();
-            // Handle the exception (e.g., fall back to a default font)
-        }
-
+        newGame.setFont(new Font("algerian", Font.PLAIN, 30)); // Sets font: algerian - Style: plain (normal) - Size: 30
         newGame.setBackground(new Color(0, 0, 0, 0)); // Set the fill color to transparent
-        newGame.setForeground(Color.WHITE);
-        
-        newGame.setBorderPainted(false);
-        newGame.setFocusPainted(false);
-        newGame.setContentAreaFilled(true);
+        newGame.setForeground(Color.WHITE); // Set the text color white
 
-        int buttonWidth = 200;
-        int buttonHeight = 60;
-        int buttonX = (gamePanel.screenWidth - buttonWidth) / 2;
-        int buttonY = (gamePanel.screenHeight - buttonHeight) / 2;
-        newGame.setBounds(buttonX, buttonY, buttonWidth, buttonHeight);
-        add(newGame);
+        newGame.setBorderPainted(false); // To delete the button border
+        newGame.setFocusPainted(false); // To delete the text border
+        newGame.setContentAreaFilled(true); // To show the button contents
 
-        // Add the event's button
+        int buttonWidth = 200; // Button width (px)
+        int buttonHeight = 60; // Button height (px)
+        int buttonX = (gamePanel.SCREEN_WIDTH - buttonWidth) / 2; // To calculate the x coordinates of the button (264 px from left)
+        int buttonY = (gamePanel.SCREEN_HEIGHT - buttonHeight) / 2; // To calculate the y coordinates of the button (258 px from above)
+
+        newGame.setBounds(buttonX, buttonY, buttonWidth, buttonHeight); // To set the button bounds (264, 258, 200, 60)
+        add(newGame); // Add the button on window
+
+        /*
+         * Add the event's button
+         * Made the transition beetwen the panels
+         * When the "new Game" button is pressed make the gamePanel visible and the menuPanel invisible
+        */
         newGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

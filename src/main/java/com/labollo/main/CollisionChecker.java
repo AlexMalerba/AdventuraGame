@@ -12,37 +12,43 @@ public class CollisionChecker {
         this.gp = gp;
     }
 
+    // Checks if an entity collides with a tile that has the collisionOn variable set to "true"
     public void checkTile(Entity entity) {
-        int entityLeftWorldX = entity.worldX + entity.solidArea.x; //11*48 + 8
-        int entityRightWorldX = entity.worldX + entity.solidArea.x + entity.solidArea.width; //11*48 + 8 + 32
-        int entityTopWorldY = entity.worldY + entity.solidArea.y; //11*48 + 16
-        int entityBottomWorldY = entity.worldY + entity.solidArea.y + entity.solidArea.height; //11*48 + 16 + 32
 
-        int entityLeftCol = entityLeftWorldX / gp.tileSize;
-        int entityRightCol = entityRightWorldX / gp.tileSize;
-        int entityTopRow = entityTopWorldY / gp.tileSize;
-        int entityBottomRow = entityBottomWorldY / gp.tileSize;
+        // Calculate the rectangle collision coordinates (The calculations are an example. They are made assuming that the player moves from the starting positions)
+        int entityLeftWorldX = entity.worldX + entity.solidArea.x; // 3024 + 25 = 3049
+        int entityRightWorldX = entityLeftWorldX + entity.solidArea.width; // 3049 + 8 = 3057
+        int entityTopWorldY = entity.worldY + entity.solidArea.y; // 1104 + 40 = 1144
+        int entityBottomWorldY = entityTopWorldY + entity.solidArea.height; //1144 + 12 = 1156
+
+        int entityLeftCol = entityLeftWorldX / gp.TILE_SIZE; // 3049 / 48 = 63
+        int entityRightCol = entityRightWorldX / gp.TILE_SIZE; // 3057 / 48 = 63
+        int entityTopRow = entityTopWorldY / gp.TILE_SIZE; // 1144 / 48 = 23
+        int entityBottomRow = entityBottomWorldY / gp.TILE_SIZE; // 1156 / 48 = 24
 
         int tileNum1 = 0, tileNum2 = 0;
 
-        if(Objects.equals(entity.direction, "up") || entity.direction == "down" || entity.direction == "right" || entity.direction == "left"){
+        // If you're moving
+        if(Objects.equals(entity.direction, "up") || Objects.equals(entity.direction, "down") || Objects.equals(entity.direction, "right") || Objects.equals(entity.direction, "left")){
+
+            // Check the direction you are going
             if(entity.direction.equals("up")){
-                entityTopRow = (entityTopWorldY - entity.speed) / gp.tileSize;
+                entityTopRow = (entityTopWorldY - entity.speed) / gp.TILE_SIZE;
                 tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
                 tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
             }
             else if(entity.direction.equals("down")){
-                entityBottomRow = (entityBottomWorldY + entity.speed) / gp.tileSize;
+                entityBottomRow = (entityBottomWorldY + entity.speed) / gp.TILE_SIZE;
                 tileNum1 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
                 tileNum2 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
             }
             if(entity.direction.equals("left")) {
-                entityLeftCol = (entityLeftWorldX - entity.speed) / gp.tileSize;
+                entityLeftCol = (entityLeftWorldX - entity.speed) / gp.TILE_SIZE;
                 tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
                 tileNum2 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
             }
             else if(entity.direction.equals("right")){
-                entityRightCol = (entityRightWorldX + entity.speed) / gp.tileSize;
+                entityRightCol = (entityRightWorldX + entity.speed) / gp.TILE_SIZE;
                 tileNum1 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
                 tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
             }
@@ -59,10 +65,13 @@ public class CollisionChecker {
     }
 
     public int checkObject(Entity entity, boolean player) {
+        // Make index 999 because when I call the pickUpObject method (Player class) I first check if index is different from 999
+        // If it's different the player has collided with an object because in this method the initial value is modified
         int index = 999;
 
         for (int i = 0; i < gp.obj.length; i++) {
             if(gp.obj[i] != null) {
+
                 // Get entity's solid area position
                 entity.solidArea.x = entity.worldX + entity.solidArea.x;
                 entity.solidArea.y = entity.worldY + entity.solidArea.y;
@@ -78,6 +87,7 @@ public class CollisionChecker {
                             if(gp.obj[i].collision) {
                                 entity.collisionOn = true;
                             }
+                            // Check if it's the player who has called the method
                             if(player) {
                                 index = i;
                             }
@@ -114,6 +124,8 @@ public class CollisionChecker {
                         }
                     }
                 }
+
+                // Reset the initial values to make sure you haven't changed anything
                 entity.solidArea.x = entity.solidAreaDefaultX;
                 entity.solidArea.y = entity.solidAreaDefaultY;
                 gp.obj[i].solidArea.x = gp.obj[i].solidAreaDefaultX;

@@ -19,7 +19,7 @@ public class UI {
 
     public UI(GamePanel gp) {
         this.gp = gp;
-        this.arial_40 = new Font("Arial", Font.ITALIC, 40);
+        this.arial_40 = new Font("algerian", Font.ITALIC, 40);
         this.key = new OBJ_key00();
         this.keyImage = key.image;
     }
@@ -27,7 +27,7 @@ public class UI {
     public void draw(Graphics2D g2) {
         g2.setFont(arial_40);
         g2.setColor(Color.WHITE);
-        g2.drawImage(keyImage, gp.tileSize/2, gp.tileSize/2-9, gp.tileSize, gp.tileSize, null);
+        g2.drawImage(keyImage, gp.TILE_SIZE /2, gp.TILE_SIZE /2-9, gp.TILE_SIZE, gp.TILE_SIZE, null);
         g2.drawString("x " + gp.player.hasKey, 74, 50);
     }
 }
