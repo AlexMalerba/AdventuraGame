@@ -86,6 +86,7 @@ public class CollisionChecker {
                         if (entity.solidArea.intersects(gp.obj[i].solidArea)) {
                             if(gp.obj[i].collision) {
                                 entity.collisionOn = true;
+                                System.out.println("Up Collision");
                             }
                             // Check if it's the player who has called the method
                             if(player) {
@@ -97,6 +98,7 @@ public class CollisionChecker {
                         if (entity.solidArea.intersects(gp.obj[i].solidArea)) {
                             if(gp.obj[i].collision) {
                                 entity.collisionOn = true;
+                                System.out.println("Down Collision");
                             }
                             if(player) {
                                 index = i;
@@ -107,6 +109,7 @@ public class CollisionChecker {
                         if (entity.solidArea.intersects(gp.obj[i].solidArea)) {
                             if(gp.obj[i].collision) {
                                 entity.collisionOn = true;
+                                System.out.println("Left Collision");
                             }
                             if(player) {
                                 index = i;
@@ -117,6 +120,7 @@ public class CollisionChecker {
                         if (entity.solidArea.intersects(gp.obj[i].solidArea)) {
                             if(gp.obj[i].collision) {
                                 entity.collisionOn = true;
+                                System.out.println("Right Collision");
                             }
                             if(player) {
                                 index = i;

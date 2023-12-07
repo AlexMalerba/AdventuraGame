@@ -15,8 +15,8 @@ public class MenuPanel extends JPanel {
         setLayout(null);
 
         // Add a background like JLabel
-        ImageIcon backgroundImage = new ImageIcon(Objects.requireNonNull(MenuPanel.class.getResource("/menu/menu00.png")));
-        JLabel backgroundLabel = new JLabel(backgroundImage);
+        ImageIcon backgroundImage = new ImageIcon(Objects.requireNonNull(MenuPanel.class.getResource("/menu/menu00.png"))); // Get the image from the path
+        JLabel backgroundLabel = new JLabel(backgroundImage); // Create a JLabel with the image
 
         backgroundLabel.setBounds(0, 0, gamePanel.SCREEN_WIDTH, gamePanel.SCREEN_HEIGHT); // Set the dimension of the background
         add(backgroundLabel); // Add backgroundPanel to the window
@@ -42,14 +42,14 @@ public class MenuPanel extends JPanel {
 
         /*
          * Add the event's button
-         * Made the transition beetwen the panels
+         * Made the transition between the panels
          * When the "new Game" button is pressed make the gamePanel visible and the menuPanel invisible
         */
         newGame.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                gamePanel.setVisible(true);
-                setVisible(false);
+            public void actionPerformed(ActionEvent e) { // When the button is pressed
+                gamePanel.setVisible(true); // Set the gamePanel visible
+                setVisible(false); // Set the menuPanel invisible
             }
         });
     }

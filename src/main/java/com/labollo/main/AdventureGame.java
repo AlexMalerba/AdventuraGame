@@ -6,14 +6,13 @@ import java.awt.CardLayout;
 
 public class AdventureGame {
 
-    // Properties of this class
+    // ---> Properties of this class
     public static GamePanel gamePanel = new GamePanel(); // Creates an object of type GamePanel named "gamePanel"
     public static MenuPanel menuPanel = new MenuPanel(gamePanel); // Creates an object of type MenuPanel named "menuPanel"
 
     public static void main( String[] args ) {
 
-        // Invokes the code block inside a Swing event dispatch thread
-        // This ensures that Swing operations are safely executed in the UI thread
+        // The SwingUtilities.invokeLater() method is used to ensure that the window is created and configured on the EDT (Event Dispatch Thread).
         SwingUtilities.invokeLater(() -> {
 
             // Creating the game window
@@ -36,7 +35,7 @@ public class AdventureGame {
             window.setLocationRelativeTo(null); // Sets the window to the center of the screen
             window.setVisible(true); // Sets the "window" object visible
 
-            ((CardLayout)window.getContentPane().getLayout()).show(window.getContentPane(), "menu"); // Initially shows the menu panel
+            ((CardLayout)window.getContentPane().getLayout()).show(window.getContentPane(), "game"); // Initially shows the menu panel
         });
     }
 }

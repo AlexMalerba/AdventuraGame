@@ -12,7 +12,7 @@ import java.awt.Toolkit;
 
 public class GamePanel extends JPanel implements Runnable {
 
-    // Properties of this class
+    // ---> Properties of this class
     // Screen settings
     public final int ORIGINAL_TILE_SIZE = 16; // 16x16 tile
     public final int SCALE = 3; // to resize the tiles
@@ -32,10 +32,10 @@ public class GamePanel extends JPanel implements Runnable {
     // FPS
     public final int FPS = 60; // The startGameThread method will be called 60 times per second
 
-    // Properties of JDK
+    // ---> Properties of JDK
     public Thread gameThread; // To create an object of type Thread
 
-    // Properties of com.labollo package
+    // ---> Properties of com.labollo package
     public KeyHandler keyH = new KeyHandler();
     public CollisionChecker cChecker = new CollisionChecker(this);
     public Player player = new Player(this, keyH);
@@ -53,12 +53,12 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void setupGame() {
-        this.aSetter.setObject();
+        this.aSetter.setObject(); // Create and set the position (if necessary) of objects
     }
 
     public void startGameThread() {
-        this.gameThread = new Thread(this);
-        this.gameThread.start();
+        this.gameThread = new Thread(this); // Create a new thread passing GamePanel class
+        this.gameThread.start(); // Call the run method to start the thread
         this.requestFocusInWindow(); // To set focus on game window
     }
 
@@ -81,37 +81,39 @@ public class GamePanel extends JPanel implements Runnable {
 
                 /* Calls the update method declared in GamePanel
                    witch it calls the update method on the player object */
-                this.update(); // Update the player movement animation
+                this.update(); // Update the player (movement animation, position, items taken)
 
                 /* Calls the repaint method declared in JComponent (Superclass of JPanel)
                    witch calls the paintComponent method declared in GamePanel */
                 repaint(); // Requires the repaint of the component (JComponent) witch in a turn activate the paintComponent method
 
-                delta--;
+                delta--; // Reset the delta
             }
         }
     }
 
     public void update() {
-        this.player.update();
+        this.player.update(); // Update the player (movement animation, position, items taken)
     }
 
+    // Draw the components of the game such us player and objects
     @Override
     public void paintComponent(Graphics g) {
-        Toolkit.getDefaultToolkit().sync();
-        super.paintComponent(g);
+        Toolkit.getDefaultToolkit().sync(); // Ensures rendering is in sync to improve graphics (It can to be omitted sometimes)
+        super.paintComponent(g); // To make sure the graphics component renders correctly
         Graphics2D g2 = (Graphics2D) g; // Converts g from Graphics class to Graphics2D class To have a better check of the object
 
-        tileM.draw(g2);
+        tileM.draw(g2); // Draw the g2 object
 
-        for (SuperObject superObject : obj) {
-            if (superObject != null) {
-                superObject.draw(g2, this);
+        // To draw all objects of the obj array
+        for (SuperObject superObject : obj) { // For each object in the obj array
+            if (superObject != null) { // Check if the object is not null
+                superObject.draw(g2, this); // Draw the object
             }
         }
 
-        this.player.draw(g2);
-        this.ui.draw(g2);
-        g2.dispose();
+        this.player.draw(g2); // Draw the player object
+        this.ui.draw(g2); // Draw the UI
+        g2.dispose(); // Releases graphics resources associated with Graphics2D to free memory
     }
 }

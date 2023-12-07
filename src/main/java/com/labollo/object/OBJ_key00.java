@@ -24,6 +24,11 @@ public class OBJ_key00 extends SuperObject {
 
     @Override
     public void status(int status) {
-
+        try {
+            image = read(Objects.requireNonNull(getClass().getResourceAsStream("/objects/key00.png")));
+        } catch (IOException e) {
+            System.err.println("Error loading image: " + name);
+            e.printStackTrace();
+        }
     }
 }

@@ -9,7 +9,6 @@ public class OBJ_casket00 extends SuperObject {
 
     public OBJ_casket00() {
         super.name = "casket00";
-        super.status = 0;
         super.collision = true;
 
         try {
@@ -20,6 +19,7 @@ public class OBJ_casket00 extends SuperObject {
     }
 
     public void status(int status) {
+        super.status = 0;
         if(status == 0) {
             try {
                 image = read(Objects.requireNonNull(getClass().getResourceAsStream("/objects/casketClosed00.png")));
@@ -27,6 +27,7 @@ public class OBJ_casket00 extends SuperObject {
                 e.printStackTrace();
             }
         } else if(status == 1) {
+            super.status = 1;
             try {
                 image = read(Objects.requireNonNull(getClass().getResourceAsStream("/objects/casketOpened00.png")));
             } catch (IOException e) {
