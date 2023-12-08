@@ -3,7 +3,11 @@ package com.labollo.tile;
 import java.awt.image.BufferedImage;
 
 public class Tile {
+
+    // ---> Properties of JDK
     private BufferedImage image;
+
+    // ---> Properties of this class
     public boolean collision;
 
     public Tile(BufferedImage image, boolean collision) {
@@ -15,7 +19,4 @@ public class Tile {
         return image;
     }
 
-    public boolean hasCollision() {
-        return collision;
-    }
 }

@@ -88,7 +88,7 @@ public class Player extends Entity {
 
             // Check object collision
             int objIndex = gp.cChecker.checkObject(this, true); // Check if the player is colliding with an object
-           // if (objIndex != 999) // If the player is colliding with an object, pick it up (objIndex != 999)
+            if (objIndex != 999) // If the player is colliding with an object, pick it up (objIndex != 999)
                 this.pickUpObject(objIndex); // Pick up the object
 
             // Moving on the map, but first, check for collision
@@ -166,7 +166,7 @@ public class Player extends Entity {
 
     // Pick up the object (index != 999)
     public void pickUpObject(int index) {
-        if (index != 999 && this.gp.obj[index] != null) { // If the object isn't null
+        if (this.gp.obj[index] != null) { // If the object isn't null
             String objName = this.gp.obj[index].name; // Get the object name
 
             switch (objName) { // Check the object name

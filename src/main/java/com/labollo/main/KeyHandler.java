@@ -5,6 +5,7 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
 
+    // It tells if the player is pressing the keys
     public boolean upPressed, downPressed, leftPressed, rightPressed, shiftPressed, cPressed;
 
     @Override
@@ -13,9 +14,9 @@ public class KeyHandler implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        int code = e.getKeyCode();
+        int code = e.getKeyCode(); // It gets the key code of the pressed key
 
-
+        // It sets the pressed key to true
         if(code == KeyEvent.VK_W || code == KeyEvent.VK_UP)
             upPressed = true;
         if(code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN)
@@ -33,8 +34,9 @@ public class KeyHandler implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        int code = e.getKeyCode();
+        int code = e.getKeyCode(); // It gets the key code of the released key
 
+        // It sets the released key to false because when the key is released the player isn't pressing it
         if(code == KeyEvent.VK_W || code == KeyEvent.VK_UP)
             upPressed = false;
         if(code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN)

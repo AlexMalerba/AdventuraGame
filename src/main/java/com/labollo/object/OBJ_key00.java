@@ -8,18 +8,10 @@ import static javax.imageio.ImageIO.read;
 public class OBJ_key00 extends SuperObject {
 
     public OBJ_key00() {
-        super.name = "key00";
-        super.solidArea.x = 16;
-        super.solidArea.y = 16;
-        super.solidArea.width = 16;
-        super.solidArea.height = 16;
-        try {
-            image = read(Objects.requireNonNull(getClass().getResourceAsStream("/objects/key00.png")));
-        } catch (IOException e) {
-            System.err.println("Error loading image: " + name);
-            e.printStackTrace();
-        }
-        collision = true;
+        super.name = "key00"; // It sets the object name
+        super.collision = true; // It tells if the player can interact with the object
+
+        status(0);
     }
 
     @Override

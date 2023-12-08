@@ -26,12 +26,12 @@ public class CollisionChecker {
         int entityTopRow = entityTopWorldY / gp.TILE_SIZE; // 1144 / 48 = 23
         int entityBottomRow = entityBottomWorldY / gp.TILE_SIZE; // 1156 / 48 = 24
 
-        int tileNum1 = 0, tileNum2 = 0;
+        int tileNum1 = 0, tileNum2 = 0; // It contains the tile number of the tile that the entity is going to collide with (It's used to check if the tile has the collisionOn variable set to "true")
 
         // If you're moving
         if(Objects.equals(entity.direction, "up") || Objects.equals(entity.direction, "down") || Objects.equals(entity.direction, "right") || Objects.equals(entity.direction, "left")){
 
-            // Check the direction you are going
+            // Check the direction you are going and calculate the tile number of the tile that the entity is going to collide with
             if(entity.direction.equals("up")){
                 entityTopRow = (entityTopWorldY - entity.speed) / gp.TILE_SIZE;
                 tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
@@ -52,19 +52,20 @@ public class CollisionChecker {
                 tileNum1 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
                 tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
             }
-        }else{
+        }else{  // If you're not moving
                 tileNum1 = -1;
                 tileNum2 = -1;
             }
 
-        if ((tileNum1 != -1 && gp.tileM.tile[tileNum1].collision) || (tileNum2 != -1 && gp.tileM.tile[tileNum2].collision)) {
-            entity.collisionOn = true;
+        if ((tileNum1 != -1 && gp.tileM.tile[tileNum1].collision) || (tileNum2 != -1 && gp.tileM.tile[tileNum2].collision)) { // If the tile has the collisionOn variable set to "true"
+            entity.collisionOn = true; // Set the collisionOn variable of the entity to "true"
         } else {
-            entity.collisionOn = false;
+            entity.collisionOn = false; // Set the collisionOn variable of the entity to "false"
         }
     }
 
     public int checkObject(Entity entity, boolean player) {
+
         // Make index 999 because when I call the pickUpObject method (Player class) I first check if index is different from 999
         // If it's different the player has collided with an object because in this method the initial value is modified
         int index = 999;
@@ -83,14 +84,14 @@ public class CollisionChecker {
                 switch (entity.direction) {
                     case "up" -> {
                         entity.solidArea.y -= entity.speed;
-                        if (entity.solidArea.intersects(gp.obj[i].solidArea)) {
-                            if(gp.obj[i].collision) {
-                                entity.collisionOn = true;
+                        if (entity.solidArea.intersects(gp.obj[i].solidArea)) { // Check if the entity's solid area intersects with the object's solid area
+                            if(gp.obj[i].collision) { // Check if the object has the collisionOn variable set to "true"
+                                entity.collisionOn = true; // Set the collisionOn variable of the entity to "true"
                                 System.out.println("Up Collision");
                             }
                             // Check if it's the player who has called the method
                             if(player) {
-                                index = i;
+                                index = i; // Set the index variable to the obj array index
                             }
                         }
                     } case "down" -> {
@@ -137,6 +138,6 @@ public class CollisionChecker {
             }
         }
 
-        return index;
+        return index; // Return the index variable to the pickUpObject method (Player class)
     }
 }

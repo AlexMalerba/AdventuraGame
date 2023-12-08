@@ -14,20 +14,26 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 public class TileManager {
+
+    // ---> Properties of com.labollo package
     GamePanel gp;
     public Tile[] tile;
-    public int[][] mapTileNum;
+
+    // ---> Properties of this class
+    public int[][] mapTileNum; // It stores the tile number of the map (80x80 tiles)
 
     public TileManager(GamePanel gp) {
         this.gp = gp;
-        tile = new Tile[100];
+        tile = new Tile[100]; // 100 is the maximum number of tiles
         mapTileNum = new int[gp.MAX_WORLD_COL][gp.MAX_WORLD_ROW];
 
-        getTileImage();
-        loadMap("/maps/map02.tmx");
+        getTileImage(); // It loads the tile images
+        loadMap("/maps/map02.tmx"); // It loads the map
     }
 
     public void getTileImage() {
+
+        // Load the tile images
         try {
             tile[15] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/grass00.png"))), false);
             tile[16] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/grass01.png"))), false);
@@ -92,36 +98,39 @@ public class TileManager {
     }
 
     public void loadMap(String filePath) {
+
+        // Load the map from a file
         try {
-            InputStream is = getClass().getResourceAsStream(filePath);
+            InputStream is = getClass().getResourceAsStream(filePath); // It loads the map file with the path filePath
 
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(is);
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance(); // It creates a new instance of DocumentBuilderFactory
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder(); // It creates a new instance of DocumentBuilder
+            Document doc = dBuilder.parse(is); // It parses the map file
 
-            NodeList layerList = doc.getElementsByTagName("layer");
-            Element layerElement = (Element) layerList.item(0); // Supponendo che ci sia solo un layer per semplicità
+            NodeList layerList = doc.getElementsByTagName("layer"); // It gets the layer list from the map file
+            Element layerElement = (Element) layerList.item(0); // It gets the first layer from the layer list
 
-            Element dataElement = (Element) layerElement.getElementsByTagName("data").item(0);
-            String data = dataElement.getTextContent().trim();
-            String[] tileStrings = data.split(",");
+            Element dataElement = (Element) layerElement.getElementsByTagName("data").item(0); // It gets the data element from the layer
+            String data = dataElement.getTextContent().trim(); // It gets the data from the data element
+            String[] tileStrings = data.split(","); // It splits the data into an array of strings
 
-            int row = 0;
-            int col = 0;
+            int row = 0; // It stores the current row
+            int col = 0; // It stores the current column
 
-            for (String tileString : tileStrings) {
-                int tileNum = Integer.parseInt(tileString.trim());
+            for (String tileString : tileStrings) { // It loops through the tileStrings array
+                int tileNum = Integer.parseInt(tileString.trim()); // It converts the tileString to an integer
 
-                // Assicurati che la posizione corrente sia all'interno dei limiti dell'array
+                // Check if the tileNum is valid
                 if (row < gp.MAX_WORLD_ROW && col < gp.MAX_WORLD_COL) {
-                    mapTileNum[col][row] = tileNum - 1;  // Sottrai 1 per adattare gli indici dell'array
+                    mapTileNum[col][row] = tileNum - 1;  // It stores the tileNum in the mapTileNum array
                 }
 
-                col++;
+                col++; // It increments the column
 
+                // Check if the column is equal to the maximum number of columns
                 if (col == gp.MAX_WORLD_COL) {
-                    col = 0;
-                    row++;
+                    col = 0; // It resets the column
+                    row++; // It increments the row
                 }
             }
 
@@ -132,35 +141,39 @@ public class TileManager {
         }
     }
 
-
+    // It draws the map
     public void draw(Graphics2D g2) {
-        int worldCol = 0;
-        int worldRow = 0;
+        int worldCol = 0; // It stores the current world column
+        int worldRow = 0; // It stores the current world row
 
+        // It loops through the mapTileNum array
         while (worldCol < gp.MAX_WORLD_COL && worldRow < gp.MAX_WORLD_ROW) {
-            int tileNum = mapTileNum[worldCol][worldRow];
+            int tileNum = mapTileNum[worldCol][worldRow]; // It gets the tile number from the mapTileNum array
 
-            int worldX = worldCol * gp.TILE_SIZE;
-            int worldY = worldRow * gp.TILE_SIZE;
-            int screenX = worldX - gp.player.worldX + gp.player.screenX;
-            int screenY = worldY - gp.player.worldY + gp.player.screenY;
+            int worldX = worldCol * gp.TILE_SIZE; // It calculates the world X coordinate
+            int worldY = worldRow * gp.TILE_SIZE; // It calculates the world Y coordinate
+            int screenX = worldX - gp.player.worldX + gp.player.screenX; // It calculates the screen X coordinate
+            int screenY = worldY - gp.player.worldY + gp.player.screenY; // It calculates the screen Y coordinate
 
+            // Check if the tile is in the screen
             if (worldX + gp.TILE_SIZE > gp.player.worldX - gp.player.screenX &&
                     worldX - gp.TILE_SIZE < gp.player.worldX + gp.player.screenX &&
                     worldY + gp.TILE_SIZE > gp.player.worldY - gp.player.screenY &&
                     worldY - gp.TILE_SIZE < gp.player.worldY + gp.player.screenY) {
 
-                // Verifica se il valore di tileNum è valido
+                // Check if the tileNum is valid and if the tile isn't null
                 if (tileNum >= 0 && tileNum < tile.length && tile[tileNum] != null) {
+                    // It draws the tile
                     g2.drawImage(tile[tileNum].getImage(), screenX, screenY, gp.TILE_SIZE, gp.TILE_SIZE, null);
                 }
             }
 
-            worldCol++;
+            worldCol++; // It increments the world column
 
+            // Check if the world column is equal to the maximum number of columns
             if (worldCol == gp.MAX_WORLD_COL) {
-                worldCol = 0;
-                worldRow++;
+                worldCol = 0; // It resets the world column
+                worldRow++; // It increments the world row
             }
         }
     }

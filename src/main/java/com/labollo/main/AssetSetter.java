@@ -31,18 +31,16 @@ public class AssetSetter {
         this.gp.obj[3].worldX = 63 * gp.TILE_SIZE;
         this.gp.obj[3].worldY = 19 * gp.TILE_SIZE;
 
-        this.gp.obj[4] = new OBJ_heart00();
+        this.gp.obj[4] = new OBJ_potion00();
+        this.gp.obj[5] = new OBJ_potion01();
 
-        this.gp.obj[5] = new OBJ_potion00();
-        this.gp.obj[6] = new OBJ_potion01();
+        this.gp.obj[6] = new OBJ_key00();
+        this.gp.obj[6].worldX = 62 * gp.TILE_SIZE;
+        this.gp.obj[6].worldY = 14 * gp.TILE_SIZE;
 
-        this.gp.obj[7] = new OBJ_key00();
-        this.gp.obj[7].worldX = 62 * gp.TILE_SIZE;
-        this.gp.obj[7].worldY = 14 * gp.TILE_SIZE;
-
-        this.gp.obj[8] = new OBJ_casket00();
-        this.gp.obj[8].status(0);
-        this.gp.obj[8].worldX = 63 * gp.TILE_SIZE;
-        this.gp.obj[8].worldY = 16 * gp.TILE_SIZE;
+        this.gp.obj[7] = new OBJ_casket00();
+        this.gp.obj[7].status(0);
+        this.gp.obj[7].worldX = 63 * gp.TILE_SIZE;
+        this.gp.obj[7].worldY = 16 * gp.TILE_SIZE;
     }
 }
