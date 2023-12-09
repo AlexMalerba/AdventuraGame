@@ -4,11 +4,14 @@ import com.labollo.main.GamePanel;
 
 import javax.imageio.ImageIO;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+
+import com.labollo.main.UtilityTool;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -34,65 +37,65 @@ public class TileManager {
     public void getTileImage() {
 
         // Load the tile images
+        setup(0, "/tiles/water00.png", true);
+        setup(1, "/tiles/water01.png", true);
+        setup(2, "/tiles/water02.png", true);
+        setup(3, "/tiles/water03.png", true);
+        setup(4, "/tiles/water04.png", true);
+        setup(5, "/tiles/water05.png", true);
+        setup(6, "/tiles/water06.png", true);
+        setup(7, "/tiles/water07.png", true);
+        setup(8, "/tiles/water08.png", true);
+        setup(9, "/tiles/water09.png", true);
+        setup(10, "/tiles/water10.png", true);
+        setup(11, "/tiles/water11.png", true);
+        setup(12, "/tiles/water12.png", true);
+        setup(13, "/tiles/water13.png", true);
+        setup(14, "/tiles/earth.png", false);
+        setup(15, "/tiles/grass00.png", false);
+        setup(16, "/tiles/grass01.png", false);
+        setup(17, "/tiles/road00.png", false);
+        setup(18, "/tiles/road01.png", false);
+        setup(19, "/tiles/road02.png", false);
+        setup(20, "/tiles/road03.png", false);
+        setup(21, "/tiles/road04.png", false);
+        setup(22, "/tiles/road05.png", false);
+        setup(23, "/tiles/road06.png", false);
+        setup(24, "/tiles/road07.png", false);
+        setup(25, "/tiles/road08.png", false);
+        setup(26, "/tiles/road09.png", false);
+        setup(27, "/tiles/road10.png", false);
+        setup(28, "/tiles/road11.png", false);
+        setup(29, "/tiles/road12.png", false);
+        setup(31, "/tiles/trunk.png", true);
+        setup(32, "/tiles/wall.png", true);
+        setup(33, "/tiles/tree00.png", true);
+        setup(34, "/tiles/tree01.png", true);
+        setup(35, "/tiles/tree01/00.png", true);
+        setup(36, "/tiles/tree01/01.png", true);
+        setup(37, "/tiles/tree01/02.png", false);
+        setup(38, "/tiles/tree01/03.png", false);
+        setup(39, "/tiles/tree02/06.png", true);
+        setup(40, "/tiles/tree02/07.png", true);
+        setup(41, "/tiles/tree02/08.png", true);
+        setup(42, "/tiles/tree02/09.png", true);
+        setup(43, "/tiles/tree02/10.png", true);
+        setup(44, "/tiles/tree02/11.png", true);
+        setup(45, "/tiles/tree02/00.png", false);
+        setup(46, "/tiles/tree02/01.png", true);
+        setup(47, "/tiles/tree02/02.png", false);
+        setup(48, "/tiles/tree02/03.png", true);
+        setup(49, "/tiles/tree02/04.png", true);
+        setup(50, "/tiles/tree02/05.png", true);
+    }
+
+    public void setup(int index, String filePath, boolean collision) {
+        UtilityTool ut = new UtilityTool(); // It creates a new instance of UtilityTool
+
         try {
-            tile[15] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/grass00.png"))), false);
-            tile[16] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/grass01.png"))), false);
-
-            tile[17] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/road00.png"))), false);
-            tile[18] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/road01.png"))), false);
-            tile[19] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/road02.png"))), false);
-            tile[20] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/road03.png"))), false);
-            tile[21] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/road04.png"))), false);
-            tile[22] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/road05.png"))), false);
-            tile[23] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/road06.png"))), false);
-            tile[24] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/road07.png"))), false);
-            tile[25] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/road08.png"))), false);
-            tile[26] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/road09.png"))), false);
-            tile[27] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/road10.png"))), false);
-            tile[28] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/road11.png"))), false);
-            tile[29] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/road12.png"))), false);
-
-            tile[33] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/tree00.png"))), true);
-            tile[34] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/tree01.png"))), true);
-            tile[32] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/wall.png"))), true);
-            tile[14] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/earth.png"))), false);
-
-            tile[35] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/tree01/00.png"))), true);
-            tile[36] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/tree01/01.png"))), true);
-            tile[37] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/tree01/02.png"))), false);
-            tile[38] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/tree01/03.png"))), false);
-
-            tile[45] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/tree02/00.png"))), false);
-            tile[46] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/tree02/01.png"))), true);
-            tile[47] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/tree02/02.png"))), false);
-            tile[48] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/tree02/03.png"))), true);
-            tile[49] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/tree02/04.png"))), true);
-            tile[50] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/tree02/05.png"))), true);
-            tile[39] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/tree02/06.png"))), true);
-            tile[40] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/tree02/07.png"))), true);
-            tile[41] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/tree02/08.png"))), true);
-            tile[42] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/tree02/09.png"))), true);
-            tile[43] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/tree02/10.png"))), true);
-            tile[44] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/tree02/11.png"))), true);
-
-            tile[0] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/water00.png"))), true);
-            tile[1] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/water01.png"))), true);
-            tile[2] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/water02.png"))), true);
-            tile[3] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/water03.png"))), true);
-            tile[4] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/water04.png"))), true);
-            tile[5] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/water05.png"))), true);
-            tile[6] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/water06.png"))), true);
-            tile[7] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/water07.png"))), true);
-            tile[8] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/water08.png"))), true);
-            tile[9] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/water09.png"))), true);
-            tile[10] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/water10.png"))), true);
-            tile[11] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/water11.png"))), true);
-            tile[12] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/water12.png"))), true);
-            tile[13] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/water13.png"))), true);
-
-            tile[31] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/trunk.png"))), true);
-
-        } catch (IOException e) {
+            // It loads the tile image and it scales it+
+            tile[index] = new Tile(ut.scaleImage(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(filePath))), gp.TILE_SIZE, gp.TILE_SIZE), collision);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -164,7 +167,7 @@ public class TileManager {
                 // Check if the tileNum is valid and if the tile isn't null
                 if (tileNum >= 0 && tileNum < tile.length && tile[tileNum] != null) {
                     // It draws the tile
-                    g2.drawImage(tile[tileNum].getImage(), screenX, screenY, gp.TILE_SIZE, gp.TILE_SIZE, null);
+                    g2.drawImage(tile[tileNum].image, screenX, screenY, gp.TILE_SIZE, gp.TILE_SIZE, null);
                 }
             }
 

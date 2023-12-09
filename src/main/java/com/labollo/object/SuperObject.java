@@ -1,10 +1,11 @@
 package com.labollo.object;
 
 import com.labollo.main.GamePanel;
+import com.labollo.main.UtilityTool;
 
-import java.awt.Rectangle;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public abstract class SuperObject {
 
@@ -15,6 +16,7 @@ public abstract class SuperObject {
     // ---> Properties of this class
     public String name; // It contains the object name
     public boolean collision = false; // It tells if the player can interact with the object
+    public final int OBJECT_DEFAULT_SIZE = 48; // It sets the object default size
 
     public int worldX, worldY; // It tells the X/Y coordinates of the object (It isn't always implements)
     public int solidAreaDefaultX = 0; // It sets the object solid area default X coordinate
@@ -22,6 +24,9 @@ public abstract class SuperObject {
 
     public int status = 0; // It tells the status of the object (If it's a chest: 0 == sprite closed; 1 == sprite opened)
     public abstract void status(int status); // This method is called when you need change the status
+
+    // ---> Methods of com.labollo package
+    UtilityTool ut = new UtilityTool();
 
     // This method is called when you need to draw the object
     public void draw(Graphics2D g2, GamePanel gp) {

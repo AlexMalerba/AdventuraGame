@@ -2,11 +2,11 @@ package com.labollo.entity;
 
 import com.labollo.main.GamePanel;
 import com.labollo.main.KeyHandler;
+import com.labollo.main.UI;
+import com.labollo.main.UtilityTool;
 
 import javax.imageio.ImageIO;
-import java.awt.Rectangle;
-import java.awt.Graphics;
-import java.awt.Image;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
@@ -48,6 +48,8 @@ public class Player extends Entity {
         super.worldY = 23 * gp.TILE_SIZE; // 23 * 48 = 1104
         super.speed = 4; // It sets the player's speed (4 pixels per frame: 4 * 60 = 240 pixels per second)
         super.direction = "down"; // It sets the player's direction
+        super.maxLife = 6; // It sets the player's max life
+        super.life = maxLife; // It sets the player's life
         this.hasKey = 5; // It sets the number of keys that the player has
     }
 
@@ -55,20 +57,30 @@ public class Player extends Entity {
     public void getPlayerImage() {
 
         // Load the sprites
-        try {
-            Image player1 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/player/up1.png")));
-            super.up1 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/player/up1.png")));
-            super.up2 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/player/up2.png")));
-            super.down1 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/player/down1.png")));
-            super.down2 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/player/down2.png")));
-            super.right1 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/player/right1.png")));
-            super.right2 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/player/right2.png")));
-            super.left1 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/player/left1.png")));
-            super.left2 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/player/left2.png")));
+        super.up1 = setup("/player/up1.png");
+        super.up2 = setup("/player/up2.png");
+        super.down1 = setup("/player/down1.png");
+        super.down2 = setup("/player/down2.png");
+        super.right1 = setup("/player/right1.png");
+        super.right2 = setup("/player/right2.png");
+        super.left1 = setup("/player/left1.png");
+        super.left2 = setup("/player/left2.png");
+    }
 
+    // Load the sprites
+    public BufferedImage setup(String filePath) {
+        UtilityTool ut = new UtilityTool(); // It creates a new UtilityTool object
+        BufferedImage image = null; // It contains the sprite image
+
+        // It reads the sprite image and scales it
+        try {
+            image = ImageIO.read(Objects.requireNonNull(getClass().getResource(filePath))); // It reads the sprite image
+            image = ut.scaleImage(image, gp.TILE_SIZE, gp.TILE_SIZE); // It scales the sprite image
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e); // It throws a new RuntimeException
         }
+
+        return image;
     }
 
     /**
@@ -178,16 +190,18 @@ public class Player extends Entity {
                 case "key00" -> {
                     this.hasKey++;
                     this.gp.obj[index] = null;
+                    this.gp.ui.setMessage("YOU TOOK A KEY");
                 }
 
                 // If the object name is door00, check if the player has the key
                 case "door00" -> {
-                    if (this.gp.obj[index].status == 0 && this.hasKey > 0) {
-                        this.gp.obj[index].status(1);
+                    if (this.hasKey > 0) {
+                        this.gp.obj[index] = null;
                         this.hasKey--;
-                        this.gp.obj[index].collision = false;
-                    } else
-                        System.out.println("You don't have the key!!!");
+                        this.gp.ui.setMessage("YOU OPENED THE DOOR");
+                    } else {
+                        this.gp.ui.setMessage("YOU NEED A KEY TO OPEN THE DOOR");
+                    }
                 }
 
                 // If the object name is casket00, check if the player has the key and open the casket
@@ -195,25 +209,28 @@ public class Player extends Entity {
                     if(gp.obj[index].status == 0) { // If the casket is closed
                         if (keyH.cPressed) { // If the player pressed the C key
                             if (this.hasKey > 0) { // If the player has the key
+                                this.hasKey--; // Decrease the number of keys
+                                this.gp.ui.setMessage("YOU OPENED THE CASKET");
                                 Random rand = new Random(); // It creates a random number
                                 int num = Math.abs(rand.nextInt(2)); // It creates a random number between 0 and 1
 
                                 gp.obj[index].status(1); // Set the casket status to 1 (opened sprite)
 
                                 if (num == 0) { // If the random number is 0
-                                    this.gp.obj[5].worldX = gp.obj[index].worldX; // Set the potion00 X coordinate
-                                    this.gp.obj[5].worldY = gp.obj[index].worldY + 2 * gp.TILE_SIZE; // Set the potion00 Y coordinate
+                                    this.gp.obj[4].worldX = gp.obj[index].worldX; // Set the potion00 X coordinate
+                                    this.gp.obj[4].worldY = gp.obj[index].worldY + 2 * gp.TILE_SIZE; // Set the potion00 Y coordinate
                                     System.out.println("P1");
                                     System.out.println("X: " + this.gp.obj[6].worldX);
                                     System.out.println("Y: " + this.gp.obj[6].worldY);
                                 } else { // If the random number is 1
-                                    this.gp.obj[6].worldX = gp.obj[index].worldX; // Set the potion01 X coordinate
-                                    this.gp.obj[6].worldY = gp.obj[index].worldY + 2 * gp.TILE_SIZE; // Set the potion01 Y coordinate
+                                    this.gp.obj[5].worldX = gp.obj[index].worldX; // Set the potion01 X coordinate
+                                    this.gp.obj[5].worldY = gp.obj[index].worldY + 2 * gp.TILE_SIZE; // Set the potion01 Y coordinate
                                     System.out.println("P2");
                                     System.out.println("X: " + this.gp.obj[7].worldX);
                                     System.out.println("Y: " + this.gp.obj[7].worldY);
                                 }
-                            }
+                            } else // If the player hasn't the key
+                                this.gp.ui.setMessage("YOU NEED A KEY TO OPEN THE CASKET");
                         }
                     }
                 }
@@ -251,7 +268,7 @@ public class Player extends Entity {
             }
         }
 
-        g2.drawImage(image, this.screenX, this.screenY, this.gp.TILE_SIZE, this.gp.TILE_SIZE, null); // Draw the player's object
+        g2.drawImage(image, this.screenX, this.screenY, null); // Draw the player's object
 
         /*
          * image: It contains the sprite image

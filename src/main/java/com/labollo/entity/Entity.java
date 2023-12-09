@@ -18,4 +18,8 @@ public class Entity {
     public Rectangle solidArea; // It sets the object solid area
     public int solidAreaDefaultX, solidAreaDefaultY; // It sets the object solid area default X/Y coordinates
     public boolean collisionOn = false; // It tells if the object is colliding with another object
+
+    // Entity status
+    public int maxLife; // It tells the max life of the entity
+    public int life; // It tells the life of the entity
 }
