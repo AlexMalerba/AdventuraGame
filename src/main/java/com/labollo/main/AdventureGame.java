@@ -2,7 +2,7 @@ package com.labollo.main;
 
 import javax.swing.SwingUtilities;
 import javax.swing.JFrame;
-import java.awt.CardLayout;
+import java.awt.*;
 
 public class AdventureGame {
 
@@ -27,12 +27,13 @@ public class AdventureGame {
             window.add(gamePanel, "game"); // Adds the game panel called "game" to the window.
             window.pack(); // Sizes the window to fit its preferred size, taking into account the added panels.
 
-            gamePanel.setupGame(); // Initializes the game settings and components.
-            gamePanel.startGameThread(); // Starts the game thread responsible for continuous updates and rendering.
-
             // Configuring window dimensions and position
             window.setSize(gamePanel.SCREEN_WIDTH, gamePanel.SCREEN_HEIGHT); // Sets the window dimensions: 768x576
             window.setLocationRelativeTo(null); // Sets the window to the center of the screen
+
+            gamePanel.setupGame(); // Initializes the game settings and components.
+            gamePanel.startGameThread(); // Starts the game thread responsible for continuous updates and rendering.
+
             window.setVisible(true); // Sets the "window" object visible
 
             ((CardLayout)window.getContentPane().getLayout()).show(window.getContentPane(), "game"); // Initially shows the menu panel

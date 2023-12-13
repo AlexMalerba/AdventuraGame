@@ -3,7 +3,6 @@ package com.labollo.object;
 import com.labollo.main.GamePanel;
 
 import java.util.Objects;
-
 import static javax.imageio.ImageIO.read;
 
 public class OBJ_heart extends SuperObject {

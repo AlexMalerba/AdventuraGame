@@ -4,8 +4,6 @@ import com.labollo.main.GamePanel;
 
 import javax.imageio.ImageIO;
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
 import javax.xml.parsers.DocumentBuilder;

@@ -2,11 +2,11 @@ package com.labollo.entity;
 
 import com.labollo.main.GamePanel;
 import com.labollo.main.KeyHandler;
-import com.labollo.main.UI;
 import com.labollo.main.UtilityTool;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
+import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;

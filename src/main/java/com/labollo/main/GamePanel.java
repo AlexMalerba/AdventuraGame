@@ -5,11 +5,9 @@ import com.labollo.object.SuperObject;
 import com.labollo.tile.TileManager;
 
 import javax.swing.JPanel;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
-import java.io.IOException;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -24,6 +22,11 @@ public class GamePanel extends JPanel implements Runnable {
     public final int SCREEN_WIDTH = TILE_SIZE * MAX_SCREEN_COL; // 768 pixels
     public final int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREEN_ROW; // 576 pixels
 
+    // Game state
+    public int gameState = 0;
+    public final int TITLESTATE = 0;
+    public final int PLAYSTATE = 1;
+
     // World settings
     public final int MAX_WORLD_COL = 80; // Columns number of the map: map02.tmx
     public final int MAX_WORLD_ROW = 80; // Rows number of the map: map02.tmx
@@ -37,7 +40,7 @@ public class GamePanel extends JPanel implements Runnable {
     public Thread gameThread; // To create an object of type Thread
 
     // ---> Properties of com.labollo package
-    public KeyHandler keyH = new KeyHandler();
+    public KeyHandler keyH = new KeyHandler(this);
     public CollisionChecker cChecker = new CollisionChecker(this);
     public Player player = new Player(this, keyH);
     public TileManager tileM = new TileManager(this);
@@ -47,7 +50,6 @@ public class GamePanel extends JPanel implements Runnable {
 
     // GamePanel constructor
     public GamePanel() {
-        this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT)); // To set your preferred panel size
         this.setDoubleBuffered(true); // To improve the graphics experience
         this.addKeyListener(keyH); // To hear which key is pressed
         this.setFocusable(true); // To enable the ability to receive input
@@ -55,6 +57,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void setupGame() {
         this.aSetter.setObject(); // Create and set the position (if necessary) of objects
+        this.gameState = this.TITLESTATE; // Set the game state
     }
 
     public void startGameThread() {
@@ -104,17 +107,22 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(g); // To make sure the graphics component renders correctly
         Graphics2D g2 = (Graphics2D) g; // Converts g from Graphics class to Graphics2D class To have a better check of the object
 
-        tileM.draw(g2); // Draw the g2 object
+        if(this.gameState == this.TITLESTATE) {
+            ui.draw(g2);
+        } else {
+            tileM.draw(g2); // Draw the g2 object
 
-        // To draw all objects of the obj array
-        for (SuperObject superObject : obj) { // For each object in the obj array
-            if (superObject != null) { // Check if the object is not null
-                superObject.draw(g2, this); // Draw the object
+            // To draw all objects of the obj array
+            for (SuperObject superObject : obj) { // For each object in the obj array
+                if (superObject != null) { // Check if the object is not null
+                    superObject.draw(g2, this); // Draw the object
+                }
             }
+
+            this.player.draw(g2); // Draw the player object
+            this.ui.draw(g2); // Draw the UI
         }
 
-        this.player.draw(g2); // Draw the player object
-        this.ui.draw(g2); // Draw the UI
         g2.dispose(); // Releases graphics resources associated with Graphics2D to free memory
     }
 }

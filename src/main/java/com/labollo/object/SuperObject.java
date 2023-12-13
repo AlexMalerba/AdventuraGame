@@ -3,9 +3,9 @@ package com.labollo.object;
 import com.labollo.main.GamePanel;
 import com.labollo.main.UtilityTool;
 
-import java.awt.*;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 public abstract class SuperObject {
 
